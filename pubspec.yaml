@@ -1,0 +1,85 @@
+name: learn_ai
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+dependencies:
+  advance_pdf_viewer2: ^2.0.4
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.6
+  dio_logging_interceptor: ^1.0.1
+  document_scanner_flutter: ^0.2.7
+  flutter:
+    sdk: flutter
+  flutter_image_compress: ^1.1.3
+  flutter_launcher_icons: ^0.12.0
+  flutter_sfsymbols: ^2.0.0
+  flutter_styled_toast: ^2.1.3
+  fluttertoast: ^8.2.1
+  get: ^4.6.5
+  http: ^0.13.5
+  ionicons: ^0.2.2
+  path: ^1.8.2
+  permission_handler: ^10.2.0
+  shared_preferences: ^2.1.0
+  sizer: ^2.0.15
+  sqflite: ^2.2.7
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background: "#000000"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: SFDisplayLight
+      fonts:
+        - asset: assets/fonts/SF-Display-Light.otf
+    - family: SFDisplayMedium
+      fonts:
+        - asset: assets/fonts/SF-Display-Medium.otf
+    - family: SFDisplaySemiBold
+      fonts:
+        - asset: assets/fonts/SF-Display-Semibold.otf
+    - family: SFDisplayBold
+      fonts:
+        - asset: assets/fonts/SF-Display-Bold.ttf
+    - family: SFDisplayRegular
+      fonts:
+        - asset: assets/fonts/SF-Display-Regular.ttf
+    - family: CharmBold
+      fonts:
+        - asset: assets/fonts/Charm-Bold.ttf
+    - family: Charm-Regular
+      fonts:
+        - asset: assets/fonts/Charm-Regular.ttf
+    - family: sficonsets
+      fonts:
+        - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
