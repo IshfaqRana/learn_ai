@@ -24,6 +24,7 @@ dependencies:
   fluttertoast: ^8.2.1
   get: ^4.6.5
   http: ^0.13.5
+  shimmer: ^2.0.0
   ionicons: ^0.2.2
   path: ^1.8.2
   permission_handler: ^10.2.0

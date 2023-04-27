@@ -21,6 +21,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: AppColors.hardBlue,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: InkWell(
@@ -33,7 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Image.asset(AppImages.back, color: AppColors.kWhite),
             ),
           ),
-          backgroundColor: AppColors.lightBlue,
+          backgroundColor: AppColors.kGrey,
           centerTitle: false,
           title: Text(
             "Answer",
@@ -41,81 +42,76 @@ class _DetailScreenState extends State<DetailScreen> {
           )),
       body: Padding(
         padding: EdgeInsets.all(2.h),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // SizedBox(
-              //   child: Row(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         SizedBox(
-              //             height: 10.w,
-              //             width: 10.w,
-              //             child: Container(
-              //               decoration: BoxDecoration(
-              //                   color: AppColors.kGrey2,
-              //                   borderRadius: BorderRadius.circular(1.w)),
-              //               child: Icon(
-              //                 Icons.chat_bubble,
-              //                 size: 8.w,
-              //                 color: AppColors.kGrey,
-              //               ),
-              //             )),
-              //         SizedBox(
-              //           width: 2.h,
-              //         ),
-              //         SizedBox(
-              //           width: 74.w,
-              //           child: Center(
-              //             child: Text(
-              //               widget.chat.question ?? "Question",
-              //               style: AppTextStyles.regBlackTextField10,
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(
-              //           width: 2.w,
-              //         ),
-              //       ]),
-              // ),
-              SizedBox(
-                height: 2.h,
-              ),
-              SizedBox(
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          height: 10.w,
-                          width: 10.w,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: AppColors.kWhite,
-                                  borderRadius: BorderRadius.circular(1.w)),
-                              child: Padding(
-                                padding: EdgeInsets.all(2.w),
-                                child: Image.asset(
-                                  AppImages.logo,
-                                  fit: BoxFit.fill,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 2.h,
+            ),
+            SizedBox(
+              child:
+                  // Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  // SizedBox(
+                  //     height: 10.w,
+                  //     width: 10.w,
+                  //     child: Container(
+                  //         decoration: BoxDecoration(
+                  //             color: AppColors.kWhite,
+                  //             borderRadius: BorderRadius.circular(1.w)),
+                  //         child: Padding(
+                  //           padding: EdgeInsets.all(2.w),
+                  //           child: Image.asset(
+                  //             AppImages.logo,
+                  //             fit: BoxFit.fill,
+                  //           ),
+                  //         ))),
+                  // SizedBox(
+                  //   width: 2.h,
+                  // ),
+                  SizedBox(
+                      // width: 74.w,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: widget.chat.question!.length,
+                          itemBuilder: ((context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.kGrey,
+                                  borderRadius: BorderRadius.circular(1.h),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(0xFF000000)
+                                          .withOpacity(0.04),
+                                      blurRadius: 0.5.h,
+                                      spreadRadius: 0.2.h,
+                                      offset: Offset(0.5.h, 0.5.h),
+                                    ),
+                                    BoxShadow(
+                                      color: const Color(0xFF000000)
+                                          .withOpacity(0.04),
+                                      blurRadius: 1.0.h,
+                                      spreadRadius: 0.1.w,
+                                      offset: Offset(-0.2.h, -0.2.h),
+                                    ),
+                                  ],
                                 ),
-                              ))),
-                      SizedBox(
-                        width: 2.h,
-                      ),
-                      SizedBox(
-                        width: 74.w,
-                        child: Text(
-                          widget.chat.question ?? "Answer",
-                          style: AppTextStyles.regBlack12W300,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 2.w,
-                      ),
-                    ]),
-              ),
-            ],
-          ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(1.h),
+                                  child: Text(
+                                    widget.chat.question![index],
+                                    style: AppTextStyles.regWhiteBold12,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }))),
+              // SizedBox(
+              //   width: 2.w,
+              // ),
+              // ]),
+            ),
+          ],
         ),
       ),
     ));

@@ -10,17 +10,17 @@ OcrDataModel ocrDataModelFromJson(String str) =>
 String ocrDataModelToJson(OcrDataModel data) => json.encode(data.toJson());
 
 class OcrDataModel {
+  final bool? status;
+  final int? statusCode;
+  final String? message;
+  final Payload? payload;
+
   OcrDataModel({
     this.status,
     this.statusCode,
     this.message,
     this.payload,
   });
-
-  final bool? status;
-  final int? statusCode;
-  final String? message;
-  final Payload? payload;
 
   factory OcrDataModel.fromJson(Map<String, dynamic> json) => OcrDataModel(
         status: json["status"],
@@ -39,21 +39,21 @@ class OcrDataModel {
 }
 
 class Payload {
+  final List<String>? text;
+  final String? url;
+
   Payload({
     this.text,
     this.url,
   });
 
-  final String? text;
-  final String? url;
-
   factory Payload.fromJson(Map<String, dynamic> json) => Payload(
-        text: json["text"],
+        text: List<String>.from(json["text"]!.map((x) => x)),
         url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
-        "text": text,
+        "text": text == null ? [] : List<dynamic>.from(text!.map((x) => x)),
         "url": url,
       };
 }

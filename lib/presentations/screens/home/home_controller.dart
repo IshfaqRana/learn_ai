@@ -1,8 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:learn_ai/utils/app_utils.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../data/apis/api_calls.dart';
@@ -13,7 +13,7 @@ class HomeController extends GetxController {
   RxBool loading = false.obs;
   RxBool isLoading = false.obs;
   Rx<UserChats> userChats = UserChats(chats: []).obs;
-  RxList<ChatModel> chats = [ChatModel(question: "", id: 0)].obs;
+  RxList<ChatModel> chats = [ChatModel(question: [], id: 0)].obs;
 
   APIServices apiServices = APIServices();
   var database;
@@ -39,9 +39,10 @@ class HomeController extends GetxController {
     Utils.printDebug(maps.length);
     for (int i = 0; i < maps.length; i++) {
       Map<String, dynamic> mapList = maps[i];
+      final items = List<String>.from(json.decode(mapList.values.elementAt(1)));
       ChatModel chat = ChatModel(
         id: mapList.values.elementAt(0),
-        question: mapList.values.elementAt(1),
+        question: items,
       );
       Utils.printDebug("Keys are :${chat.id}");
       chats.add(chat);
@@ -52,10 +53,11 @@ class HomeController extends GetxController {
 
   Future<void> insertQuestion(ChatModel chat) async {
     Database db = await openDB();
-
+    final questions = json.encode(chat.question);
+    DBInsertion dbInsertion = DBInsertion(id: chat.id, question: questions);
     await db.insert(
       'questions',
-      chat.toMap(),
+      dbInsertion.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

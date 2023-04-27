@@ -6,7 +6,7 @@ class ChatModel {
     this.question,
     this.id,
   });
-  final String? question;
+  final List<String>? question;
   final int? id;
 
   Map<String, dynamic> toMap() {
@@ -18,7 +18,8 @@ class ChatModel {
 
   factory ChatModel.fromMap(Map<String, dynamic> map) {
     return ChatModel(
-      question: map['question'] != null ? map['question'] as String : null,
+      question:
+          map['question'] != null ? map['question'] as List<String> : null,
       id: map['id'] != null ? map['id'] as int : null,
     );
   }
@@ -32,4 +33,32 @@ class ChatModel {
 class UserChats {
   UserChats({this.chats});
   final List<ChatModel>? chats;
+}
+
+class DBInsertion {
+  DBInsertion({
+    this.question,
+    this.id,
+  });
+  final String? question;
+  final int? id;
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'question': question,
+      'id': id,
+    };
+  }
+
+  factory DBInsertion.fromMap(Map<String, dynamic> map) {
+    return DBInsertion(
+      question: map['question'] != null ? map['question'] as String : null,
+      id: map['id'] != null ? map['id'] as int : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory DBInsertion.fromJson(String source) =>
+      DBInsertion.fromMap(json.decode(source) as Map<String, dynamic>);
 }
