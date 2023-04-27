@@ -46,6 +46,12 @@ class AppTextStyles {
     fontFamily: AppFont.sFDisplaySemibold,
     overflow: TextOverflow.ellipsis,
   );
+  static TextStyle regWhiteTextField12 = TextStyle(
+    color: AppColors.kWhite,
+    fontSize: 12.sp,
+    fontFamily: AppFont.sFDisplaySemibold,
+    overflow: TextOverflow.ellipsis,
+  );
   static TextStyle regBlackTextField10 = TextStyle(
     color: AppColors.kText,
     fontSize: 10.sp,

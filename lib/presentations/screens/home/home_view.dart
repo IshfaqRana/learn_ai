@@ -121,210 +121,224 @@ class _HomePageViewState extends State<HomePageView> {
                             SizedBox(height: 4.h, width: 4.h, child: loader()))
                   ]),
             )
-          : Scaffold(
-              backgroundColor: AppColors.kWhite,
-              floatingActionButton: FloatingActionButton.extended(
-                backgroundColor: AppColors.lightBlue,
-                // foregroundColor: Colors.black,
-                onPressed: () {
-                  openImageScanner(context);
-                },
-                icon: Icon(
-                  Icons.camera_alt,
-                  size: 6.w,
-                  color: AppColors.kWhite,
+          : SafeArea(
+            child: Scaffold(
+                backgroundColor: AppColors.hardBlue,
+                floatingActionButton: FloatingActionButton.extended(
+                  backgroundColor: AppColors.lightBlue,
+                  // foregroundColor: Colors.black,
+                  onPressed: () {
+                    openImageScanner(context);
+                  },
+                  icon: Icon(
+                    Icons.camera_alt,
+                    size: 6.w,
+                    color: AppColors.kWhite,
+                  ),
+                  label: const Text('Scan Assignment'),
                 ),
-                label: const Text('Scan Assignment'),
-              ),
-              // drawer: Drawer(
-              //   child: ListView(
-              //     padding: EdgeInsets.zero,
-              //     children: [
-              //       DrawerHeader(
-              //         decoration: BoxDecoration(
-              //           color: AppColors.lightBlue,
-              //         ),
-              //         child: Center(
-              //           child: Text(
-              //             'Learn AI',
-              //             style: AppTextStyles.regBlack12Bold,
-              //           ),
-              //         ),
-              //       ),
-              //       ListTile(
-              //         leading: Icon(Icons.logout),
-              //         title: Text(
-              //           'Log out',
-              //           style: AppTextStyles.regBlack10Medium,
-              //         ),
-              //         onTap: () async {
-              //           SharedPreferences prefs =
-              //               await SharedPreferences.getInstance();
-              //           prefs.clear();
-              //           Get.offAll(() => LoginView());
-              //         },
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(kToolbarHeight + 100),
-                child: AppBar(
-                  backgroundColor: AppColors.kWhite,
-                  flexibleSpace: ClipPath(
-                    clipper: CustomAppBarClipper(),
-                    child: Container(color: AppColors.lightBlue),
-                  ),
-                  centerTitle: false,
-                  title: Text(
-                    "Learn AI",
-                    style: AppTextStyles.regWhiteBold20,
-                  ),
-                  // centerTitle: true,
-                  elevation: 0,
-                  actions: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: 2.5.w, left: 2.5.w, right: 4.w, bottom: 2.5.w),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.h),
+                // drawer: Drawer(
+                //   child: ListView(
+                //     padding: EdgeInsets.zero,
+                //     children: [
+                //       DrawerHeader(
+                //         decoration: BoxDecoration(
+                //           color: AppColors.lightBlue,
+                //         ),
+                //         child: Center(
+                //           child: Text(
+                //             'Learn AI',
+                //             style: AppTextStyles.regBlack12Bold,
+                //           ),
+                //         ),
+                //       ),
+                //       ListTile(
+                //         leading: Icon(Icons.logout),
+                //         title: Text(
+                //           'Log out',
+                //           style: AppTextStyles.regBlack10Medium,
+                //         ),
+                //         onTap: () async {
+                //           SharedPreferences prefs =
+                //               await SharedPreferences.getInstance();
+                //           prefs.clear();
+                //           Get.offAll(() => LoginView());
+                //         },
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                appBar: PreferredSize(
+                  preferredSize: const Size.fromHeight(kToolbarHeight + 100),
+                  child: AppBar(
+                    backgroundColor: AppColors.hardBlue,
+                    flexibleSpace: ClipPath(
+                      clipper: CustomAppBarClipper(),
+                      child: Container(color: AppColors.kGrey),
+                    ),
+                    centerTitle: false,
+                    title: Text(
+                      "Learn AI",
+                      style: AppTextStyles.regWhiteBold20,
+                    ),
+                    // centerTitle: true,
+                    elevation: 0,
+                    actions: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 2.5.w, left: 2.5.w, right: 4.w, bottom: 2.5.w),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.h),
+                            ),
                           ),
-                        ),
-                        onPressed: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.clear();
-                          Get.offAll(() => LoginView());
-                        },
-                        child: Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: AppColors.kWhite,
-                            fontSize: 16.0,
+                          onPressed: () async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.clear();
+                            Get.offAll(() => LoginView());
+                          },
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: AppColors.kWhite,
+                              fontSize: 16.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                  automaticallyImplyLeading: false,
+                    ],
+                    automaticallyImplyLeading: false,
+                  ),
                 ),
-              ),
-
-              // AppBar(
-              //     backgroundColor: AppColors.lightBlue,
-              //     title: Text(
-              //       "Learn AI",
-              //       style: AppTextStyles.regBlack12Bold,
-              //     )),
-              body: Obx(() {
-                return SizedBox(
-                  height: 87.5.h,
-                  child: Padding(
-                    padding: EdgeInsets.all(2.5.w),
-                    child: homeController.chats.isEmpty
-                        ? Center(
-                            child: Text(
-                              "Please Scan your assignments.",
-                              style: AppTextStyles.regBlack10Medium,
-                            ),
-                          )
-                        : ListView.builder(
-                            itemCount: homeController.chats.length,
-                            itemBuilder: ((context, index) {
-                              return SizedBox(
-                                height: 10.h,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 1.h,
+          
+                // AppBar(
+                //     backgroundColor: AppColors.lightBlue,
+                //     title: Text(
+                //       "Learn AI",
+                //       style: AppTextStyles.regBlack12Bold,
+                //     )),
+                body: Obx(() {
+                  return SizedBox(
+                    height: 87.5.h,
+                    child: Padding(
+                      padding: EdgeInsets.all(2.h),
+                      child: homeController.chats.isEmpty
+                          ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 4.h,
+                                child: Text("Previuos Searches",style: AppTextStyles.regWhiteBold15,),
+                              ),
+                              SizedBox(
+                                height: 62.h,
+                                child: Center(
+                                    child: Text(
+                                      "Search history is empty!",
+                                      style: AppTextStyles.regWhite10Bold,
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(() => DetailScreen(
-                                              chat: homeController.chats[index],
-                                            ));
-                                      },
-                                      child: Container(
-                                        height: 8.h,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: .2.w,
-                                              color: AppColors.kGrey),
-                                          borderRadius:
-                                              BorderRadius.circular(2.w),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 2.w,
-                                              right: 2.w,
-                                              top: 1.w,
-                                              bottom: 1.w),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                height: 4.h,
-                                                width: 10.w,
-                                                child: Icon(
-                                                  Icons.chat_bubble,
-                                                  size: 8.w,
-                                                  color: AppColors.kGrey,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 2.w,
-                                              ),
-                                              SizedBox(
-                                                width: 64.w,
-                                                child: Text(
-                                                  homeController.chats[index]
-                                                          .question ??
-                                                      "Question",
-                                                  style: AppTextStyles
-                                                      .regBlackTextField10,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 2.w,
-                                              ),
-                                              SizedBox(
-                                                height: 4.h,
-                                                width: 10.w,
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    homeController
-                                                        .deleteQuestion(
-                                                            homeController
-                                                                .chats[index]);
-                                                  },
+                                  ),
+                              ),
+                            ],
+                          )
+                          : ListView.builder(
+                              itemCount: homeController.chats.length,
+                              itemBuilder: ((context, index) {
+                                return SizedBox(
+                                  height: 10.h,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => DetailScreen(
+                                                chat: homeController.chats[index],
+                                              ));
+                                        },
+                                        child: Container(
+                                          height: 8.h,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: .2.w,
+                                                color: AppColors.kGrey),
+                                            borderRadius:
+                                                BorderRadius.circular(2.w),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 2.w,
+                                                right: 2.w,
+                                                top: 1.w,
+                                                bottom: 1.w),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 4.h,
+                                                  width: 10.w,
                                                   child: Icon(
-                                                    Icons.delete,
+                                                    Icons.chat_bubble,
                                                     size: 8.w,
                                                     color: AppColors.kGrey,
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                SizedBox(
+                                                  width: 64.w,
+                                                  child: Text(
+                                                    homeController.chats[index]
+                                                            .question ??
+                                                        "Question",
+                                                    style: AppTextStyles
+                                                        .regBlackTextField10,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                SizedBox(
+                                                  height: 4.h,
+                                                  width: 10.w,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      homeController
+                                                          .deleteQuestion(
+                                                              homeController
+                                                                  .chats[index]);
+                                                    },
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      size: 8.w,
+                                                      color: AppColors.kGrey,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    )
-                                  ],
-                                ),
-                              );
-                            })),
-                  ),
-                );
-              }),
-            ),
+                                      SizedBox(
+                                        height: 1.h,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              })),
+                    ),
+                  );
+                }),
+              ),
+          ),
     );
   }
 }

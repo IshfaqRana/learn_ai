@@ -23,7 +23,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: AppColors.kWhite,
+        backgroundColor: AppColors.hardBlue,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -50,7 +50,7 @@ class LoginView extends StatelessWidget {
                     width: 70.0.w,
                     child: Text(
                       "Let’s sign you In!",
-                      style: AppTextStyles.regBlack25Medium,
+                      style: AppTextStyles.regWhiteBold15,
                     ),
                   ),
                   SizedBox(
@@ -59,7 +59,7 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: AppColors.kWhite,
+                      color: AppColors.kGrey,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(1.0.h),
                           topRight: Radius.circular(1.0.h)),
@@ -91,7 +91,7 @@ class LoginView extends StatelessWidget {
                             Ionicons.person_outline,
                             //CupertinoIcons.person,
                             size: 3.8.w,
-                            color: AppColors.lightBlue,
+                            color: AppColors.kWhite,
                           ),
                         ),
                         SizedBox(
@@ -102,7 +102,7 @@ class LoginView extends StatelessWidget {
                           width: 68.w,
                           child: TextField(
                               //textAlign: TextAlign.start,
-                              style: AppTextStyles.regBlackTextField12,
+                              style: AppTextStyles.regWhiteTextField12,
                               maxLines: 1,
                               controller: emailController,
                               decoration: InputDecoration.collapsed(
@@ -111,7 +111,7 @@ class LoginView extends StatelessWidget {
                                 hintText: "Email",
 
                                 border: InputBorder.none,
-                                hintStyle: AppTextStyles.regBlackTextField12,
+                                hintStyle: AppTextStyles.regWhiteTextField12,
                               )),
                         ),
                       ],
@@ -123,7 +123,7 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: AppColors.kWhite,
+                      color: AppColors.kGrey,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(1.0.h),
                           bottomRight: Radius.circular(1.0.h)),
@@ -155,7 +155,7 @@ class LoginView extends StatelessWidget {
                               child: Icon(
                                 Icons.lock_outlined,
                                 size: 4.w,
-                                color: AppColors.lightBlue,
+                                color: AppColors.kWhite,
                               )),
                           SizedBox(
                             width: 4.w,
@@ -165,14 +165,14 @@ class LoginView extends StatelessWidget {
                             width: 68.w,
                             child: TextField(
                                 maxLines: 1,
-                                style: AppTextStyles.regBlackTextField12,
+                                style: AppTextStyles.regWhiteTextField12,
                                 obscureText: loginController.visible.value,
                                 controller: passwordController,
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration.collapsed(
                                   hintText: "Password",
                                   border: InputBorder.none,
-                                  hintStyle: AppTextStyles.regBlackTextField12,
+                                  hintStyle: AppTextStyles.regWhiteTextField12,
 
                                   // suffix: SizedBox(
                                   //     height: 1.h,
@@ -265,12 +265,12 @@ class LoginView extends StatelessWidget {
                             maxLines: 1,
                             text: TextSpan(
                                 text: 'Don`t have an account? ',
-                                style: AppTextStyles.regBlack10Bold,
+                                style: AppTextStyles.regWhite10Bold,
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: 'Sign Up',
                                       style: TextStyle(
-                                        color: AppColors.lightBlue,
+                                        color: Colors.blue,
                                         fontSize: 10.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
