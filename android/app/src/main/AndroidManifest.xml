@@ -7,7 +7,7 @@
 
 
    <application
-        android:label="learn_ai"
+        android:label="Learn AI"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
