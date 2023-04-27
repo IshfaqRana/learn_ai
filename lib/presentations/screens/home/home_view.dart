@@ -175,6 +175,7 @@ class _HomePageViewState extends State<HomePageView> {
                     clipper: CustomAppBarClipper(),
                     child: Container(color: AppColors.lightBlue),
                   ),
+                  centerTitle: false,
                   title: Text(
                     "Learn AI",
                     style: AppTextStyles.regWhiteBold20,

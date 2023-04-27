@@ -34,6 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ),
           backgroundColor: AppColors.lightBlue,
+          centerTitle: false,
           title: Text(
             "Answer",
             style: AppTextStyles.regWhiteBold15,
