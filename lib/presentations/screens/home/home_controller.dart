@@ -65,8 +65,7 @@ class HomeController extends GetxController {
   Future<void> deleteQuestion(ChatModel chat) async {
     Database db = await openDB();
 
-    await db
-        .delete('questions', where: 'question = ?', whereArgs: [chat.question]);
+    await db.delete('questions', where: 'id = ?', whereArgs: [chat.id]);
     chats.remove(chat);
   }
 
