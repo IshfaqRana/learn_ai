@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
+import '../../widgets/curved_app_bar.dart';
 import '../answer_screen/detail_screen.dart';
 import '../login/login_view.dart';
 
@@ -121,6 +122,7 @@ class _HomePageViewState extends State<HomePageView> {
                   ]),
             )
           : Scaffold(
+              backgroundColor: AppColors.kWhite,
               floatingActionButton: FloatingActionButton.extended(
                 backgroundColor: AppColors.lightBlue,
                 // foregroundColor: Colors.black,
@@ -134,43 +136,88 @@ class _HomePageViewState extends State<HomePageView> {
                 ),
                 label: const Text('Scan Assignment'),
               ),
-              drawer: Drawer(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightBlue,
-                      ),
-                      child: Center(
+              // drawer: Drawer(
+              //   child: ListView(
+              //     padding: EdgeInsets.zero,
+              //     children: [
+              //       DrawerHeader(
+              //         decoration: BoxDecoration(
+              //           color: AppColors.lightBlue,
+              //         ),
+              //         child: Center(
+              //           child: Text(
+              //             'Learn AI',
+              //             style: AppTextStyles.regBlack12Bold,
+              //           ),
+              //         ),
+              //       ),
+              //       ListTile(
+              //         leading: Icon(Icons.logout),
+              //         title: Text(
+              //           'Log out',
+              //           style: AppTextStyles.regBlack10Medium,
+              //         ),
+              //         onTap: () async {
+              //           SharedPreferences prefs =
+              //               await SharedPreferences.getInstance();
+              //           prefs.clear();
+              //           Get.offAll(() => LoginView());
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(kToolbarHeight + 100),
+                child: AppBar(
+                  backgroundColor: AppColors.kWhite,
+                  flexibleSpace: ClipPath(
+                    clipper: CustomAppBarClipper(),
+                    child: Container(color: AppColors.lightBlue),
+                  ),
+                  title: Text(
+                    "Learn AI",
+                    style: AppTextStyles.regWhiteBold20,
+                  ),
+                  // centerTitle: true,
+                  elevation: 0,
+                  actions: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 2.5.w, left: 2.5.w, right: 4.w, bottom: 2.5.w),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.h),
+                          ),
+                        ),
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.clear();
+                          Get.offAll(() => LoginView());
+                        },
                         child: Text(
-                          'Learn AI',
-                          style: AppTextStyles.regBlack12Bold,
+                          'Logout',
+                          style: TextStyle(
+                            color: AppColors.kWhite,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
                     ),
-                    ListTile(
-                      leading: Icon(Icons.logout),
-                      title: Text(
-                        'Log out',
-                        style: AppTextStyles.regBlack10Medium,
-                      ),
-                      onTap: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.clear();
-                        Get.offAll(() => LoginView());
-                      },
-                    ),
                   ],
+                  automaticallyImplyLeading: false,
                 ),
               ),
-              appBar: AppBar(
-                  backgroundColor: AppColors.lightBlue,
-                  title: Text(
-                    "Learn AI",
-                    style: AppTextStyles.regBlack12Bold,
-                  )),
+
+              // AppBar(
+              //     backgroundColor: AppColors.lightBlue,
+              //     title: Text(
+              //       "Learn AI",
+              //       style: AppTextStyles.regBlack12Bold,
+              //     )),
               body: Obx(() {
                 return SizedBox(
                   height: 87.5.h,

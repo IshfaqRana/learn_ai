@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:learn_ai/presentations/screens/login/login_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
@@ -11,7 +10,6 @@ import '../../../utils/app_images.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
 import '../../widgets/custom_button.dart';
-import '../forget_password/forget_password_view.dart';
 import '../signup/signup_view.dart';
 
 class LoginView extends StatelessWidget {

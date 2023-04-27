@@ -199,6 +199,16 @@ class AppTextStyles {
       fontSize: 12.sp,
       fontWeight: FontWeight.bold,
       fontFamily: AppFont.sFDisplaySemibold);
+  static TextStyle regWhiteBold20 = TextStyle(
+      color: AppColors.kWhite,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.bold,
+      fontFamily: AppFont.sFDisplayBold);
+  static TextStyle regWhiteBold15 = TextStyle(
+      color: AppColors.kWhite,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.bold,
+      fontFamily: AppFont.sFDisplayBold);
   static TextStyle regWhite13 = TextStyle(
       color: AppColors.kWhite,
       fontSize: 13.sp,

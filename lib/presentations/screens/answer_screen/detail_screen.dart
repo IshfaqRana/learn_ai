@@ -29,14 +29,14 @@ class _DetailScreenState extends State<DetailScreen> {
             },
             child: SizedBox(
               height: 3.h,
-              width: 1.5.h,
-              child: Image.asset(AppImages.back, color: AppColors.kBlack),
+              width: 5.w,
+              child: Image.asset(AppImages.back, color: AppColors.kWhite),
             ),
           ),
           backgroundColor: AppColors.lightBlue,
           title: Text(
-            "Answers",
-            style: AppTextStyles.regBlack15Bold,
+            "Answer",
+            style: AppTextStyles.regWhiteBold15,
           )),
       body: Padding(
         padding: EdgeInsets.all(2.h),
