@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -98,10 +99,21 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.all(1.h),
-                                  child: Text(
-                                    widget.chat.question![index],
+                                  child: DefaultTextStyle(
                                     style: AppTextStyles.regWhiteBold12,
+                                    child: AnimatedTextKit(
+                                      totalRepeatCount: 1,
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                          widget.chat.question![index],
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                  // Text(
+                                  //   widget.chat.question![index],
+                                  //   style: AppTextStyles.regWhiteBold12,
+                                  // ),
                                 ),
                               ),
                             );
