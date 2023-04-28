@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     openDB();
-    insertOneSampleData();
+    // insertOneSampleData();
     getUserChats();
     super.onInit();
   }
