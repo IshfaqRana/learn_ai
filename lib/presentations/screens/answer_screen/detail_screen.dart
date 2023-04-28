@@ -41,7 +41,7 @@ class _DetailScreenState extends State<DetailScreen> {
             style: AppTextStyles.regWhiteBold15,
           )),
       body: Padding(
-        padding: EdgeInsets.all(2.h),
+        padding: EdgeInsets.all(0.5.h),
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: widget.chat.question!.length,
