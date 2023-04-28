@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_ai/utils/app_utils.dart';
 import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 import 'package:sizer/sizer.dart';
 import 'package:sqflite/sqflite.dart';
@@ -73,27 +74,36 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.kWhite,
-        body: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: SizedBox(
-                  height: 30.h,
-                  child: Image.asset(
-                    AppImages.splash,
-                    fit: BoxFit.fill,
-                    // color: AppColors.kBlack,
+    return Shimmer(
+      duration: const Duration(seconds: 10), //Default value
+      interval:
+          const Duration(seconds: 1), //Default value: Duration(seconds: 0)
+      color: AppColors.hardBlue, //Default value
+      colorOpacity: 0, //Default value
+      enabled: true, //Default value
+      direction: const ShimmerDirection.fromLTRB(),
+      child: Scaffold(
+          backgroundColor: AppColors.kWhite,
+          body: SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: SizedBox(
+                    height: 30.h,
+                    child: Image.asset(
+                      AppImages.splash,
+                      fit: BoxFit.fill,
+                      // color: AppColors.kBlack,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 }

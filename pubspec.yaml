@@ -26,10 +26,12 @@ dependencies:
   get: ^4.6.5
   http: ^0.13.5
   ionicons: ^0.2.2
+  loading_animation_widget: ^1.2.0+4
   path: ^1.8.2
   permission_handler: ^10.2.0
   shared_preferences: ^2.1.0
   shimmer: ^2.0.0
+  shimmer_animation: ^2.1.0+1
   sizer: ^2.0.15
   sqflite: ^2.2.7
 

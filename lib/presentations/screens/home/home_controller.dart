@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:learn_ai/data/models/ocr_data_model.dart';
 import 'package:learn_ai/utils/app_utils.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -21,7 +22,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     openDB();
-
+    insertOneSampleData();
     getUserChats();
     super.onInit();
   }
@@ -67,6 +68,46 @@ class HomeController extends GetxController {
 
     await db.delete('questions', where: 'id = ?', whereArgs: [chat.id]);
     chats.remove(chat);
+  }
+
+  insertOneSampleData() {
+    OcrDataModel ocrDataModel = OcrDataModel.fromJson({
+      "status": true,
+      "statusCode": 200,
+      "message": "success",
+      "payload": {
+        "text": [
+          "1) Flutter AOT or JIT?",
+          "Answer: Flutter runs in JIT for faster compilation/debugging support in debug mode and AOT mode for better performance in profile and release mode.",
+          "",
+          "2) Flutter Trees:",
+          "Answer:",
+          "1. Widget Tree",
+          "2. Element Tree",
+          "3. Render Tree",
+          "4. Layer Tree",
+          "",
+          "3) Flutter Rendering:",
+          "Answer:",
+          "1. Handle User Input",
+          "2. Run animations",
+          "3. Build the widget tree",
+          "4. Layout the render object",
+          "5. Paint the render object",
+          "6. Composite everything into a single image",
+          "7. Rasterize: show the output.",
+          "",
+          "4) Dependency Injection:",
+          "Answer: Dependency Injection (DI) is a design pattern used to implement Inversion of Control. It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them. This brings a higher level of flexibility, decoupling, and easier testing."
+        ],
+        "url":
+            "https://ocrchatgpt3.s3.us-east-2.amazonaws.com/public_images/a0985522-b935-473c-87d6-6e5a31175640-7db835a9-e0af-485f-a3c4-4b81fcb61e14.PNG"
+      }
+    });
+    ChatModel chatModel =
+        ChatModel(id: chats.length + 1, question: ocrDataModel.payload!.text);
+    insertQuestion(chatModel);
+    chats.add(chatModel);
   }
 
   getAnswer(path, context) async {
