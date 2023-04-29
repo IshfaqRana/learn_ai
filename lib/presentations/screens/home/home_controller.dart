@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
   Rx<UserChats> userChats = UserChats(chats: []).obs;
   RxList<ChatModel> chats = [ChatModel(question: [], id: 0)].obs;
+  int id = 0;
 
   APIServices apiServices = APIServices();
   var database;
@@ -45,6 +46,7 @@ class HomeController extends GetxController {
         id: mapList.values.elementAt(0),
         question: items,
       );
+      id = chat.id ?? 0;
       Utils.printDebug("Keys are :${chat.id}");
       chats.add(chat);
     }
@@ -116,8 +118,13 @@ class HomeController extends GetxController {
     var ocrDataModel = await apiServices.getAnswer(File(path), context);
     if (ocrDataModel.status ?? false) {
       ChatModel chatModel =
-          ChatModel(id: chats.length + 1, question: ocrDataModel.payload!.text);
+          ChatModel(id: id + 1, question: ocrDataModel.payload!.text);
+      id = id + 1;
       insertQuestion(chatModel);
+      Utils.printDebug("Checking id");
+      Utils.printDebug(chats.length);
+      Utils.printDebug(chatModel.id);
+
       chats.add(chatModel);
       Get.offAll(() => DetailScreen(
             chat: chatModel,

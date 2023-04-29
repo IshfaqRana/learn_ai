@@ -52,7 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.kGrey,
+                          color: Color(0xFF616D7E),
                           borderRadius: BorderRadius.circular(1.h),
                           boxShadow: [
                             BoxShadow(
