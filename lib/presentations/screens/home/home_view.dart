@@ -379,7 +379,7 @@ class _HomePageViewState extends State<HomePageView> with SingleTickerProviderSt
                   );
                 }),
               Container(
-            color: Colors.white,
+            color: AppColors.hardBlue,
             child: Center(
               child: Builder(builder: (BuildContext context) {
                 openImageScanner(context);
