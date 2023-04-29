@@ -26,14 +26,28 @@ class HomePageView extends StatefulWidget {
   State<HomePageView> createState() => _HomePageViewState();
 }
 
-class _HomePageViewState extends State<HomePageView> {
+class _HomePageViewState extends State<HomePageView> with SingleTickerProviderStateMixin,AutomaticKeepAliveClientMixin{
+  late TabController _tabController;
+  late PageController pageController;
   HomeController homeController = Get.put(HomeController());
   File? scannedImage;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    pageController = PageController(initialPage: 0,);
     super.initState();
     requestCameraPermission();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    pageController.dispose();
+    super.dispose();
   }
 
   Future<void> requestCameraPermission() async {
@@ -70,6 +84,7 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
 // Pick an image.
+
 
   openImageScanner(BuildContext context) async {
     var image = await DocumentScannerFlutter.launch(context,
@@ -131,19 +146,19 @@ class _HomePageViewState extends State<HomePageView> {
           )
         : Scaffold(
             backgroundColor: AppColors.hardBlue,
-            floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: AppColors.lightBlue,
-              // foregroundColor: Colors.black,
-              onPressed: () {
-                openImageScanner(context);
-              },
-              icon: Icon(
-                Icons.camera_alt,
-                size: 6.w,
-                color: AppColors.kWhite,
-              ),
-              label: const Text('Scan Assignment'),
-            ),
+            // floatingActionButton: FloatingActionButton.extended(
+            //   backgroundColor: AppColors.lightBlue,
+            //   // foregroundColor: Colors.black,
+            //   onPressed: () {
+            //     openImageScanner(context);
+            //   },
+            //   icon: Icon(
+            //     Icons.camera_alt,
+            //     size: 6.w,
+            //     color: AppColors.kWhite,
+            //   ),
+            //   label: const Text('Scan Assignment'),
+            // ),
 
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(kToolbarHeight + 100),
@@ -158,6 +173,21 @@ class _HomePageViewState extends State<HomePageView> {
                   "Learn AI",
                   style: AppTextStyles.regWhiteBold20,
                 ),
+        //         bottom: TabBar(
+        //   controller: _tabController,
+        //   indicatorColor: Colors.white,
+        //   indicatorWeight: 4.0,
+        //   tabs: const [
+        //     Tab(
+        //       icon: Icon(Icons.home),
+        //       text: "Home Screen",
+        //     ),
+        //     Tab(
+        //       icon: Icon(Icons.scanner),
+        //       text: "Scan",
+        //     ),
+        //   ],
+        // ),
                 // centerTitle: true,
                 elevation: 0,
                 actions: <Widget>[
@@ -191,165 +221,174 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ),
 
-            // AppBar(
-            //     backgroundColor: AppColors.lightBlue,
-            //     title: Text(
-            //       "Learn AI",
-            //       style: AppTextStyles.regBlack12Bold,
-            //     )),
-            body: Obx(() {
-              return SizedBox(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 2.h, bottom: 2.h, left: 2.5.w, right: 2.5.w),
-                  child: homeController.chats.isEmpty
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 4.h,
-                              child: Text(
-                                "Previuos Searches",
-                                style: AppTextStyles.regWhiteBold12,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 62.h,
-                              child: Center(
-                                child: DefaultTextStyle(
-                                  style: AppTextStyles.regWhite10Bold,
-                                  child: AnimatedTextKit(
-                                    totalRepeatCount: 1,
-                                    animatedTexts: [
-                                      TyperAnimatedText(
-                                        "Search history is empty!",
-                                      ),
-                                    ],
+            
+            body: PageView(
+        controller: pageController,
+        children: [
+                Obx(() {
+                  return SizedBox(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: 2.h, bottom: 2.h, left: 2.5.w, right: 2.5.w),
+                      child: homeController.chats.isEmpty
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 4.h,
+                                  child: Text(
+                                    "Previuos Searches",
+                                    style: AppTextStyles.regWhiteBold12,
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 4.h,
-                              child: Text(
-                                "Previuos Searches",
-                                style: AppTextStyles.regWhiteBold12,
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 62.h,
-                              child: ListView.builder(
-                                  itemCount: homeController.chats.length,
-                                  itemBuilder: ((context, index) {
-                                    return SizedBox(
-                                      height: 10.h,
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 1.h,
+                                SizedBox(
+                                  height: 62.h,
+                                  child: Center(
+                                    child: DefaultTextStyle(
+                                      style: AppTextStyles.regWhite10Bold,
+                                      child: AnimatedTextKit(
+                                        totalRepeatCount: 1,
+                                        animatedTexts: [
+                                          TyperAnimatedText(
+                                            "Search history is empty!",
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              Get.to(() => DetailScreen(
-                                                    chat: homeController
-                                                        .chats[index],
-                                                  ));
-                                            },
-                                            child: Container(
-                                              height: 8.h,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: .2.w,
-                                                    color: AppColors.kWhite),
-                                                borderRadius:
-                                                    BorderRadius.circular(2.w),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 2.w,
-                                                    right: 2.w,
-                                                    top: 1.w,
-                                                    bottom: 1.w),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 4.h,
-                                                      width: 10.w,
-                                                      child: Icon(
-                                                        Icons.chat_bubble,
-                                                        size: 8.w,
-                                                        color: AppColors.kWhite,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 2.w,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 64.w,
-                                                      child: DefaultTextStyle(
-                                                        style: AppTextStyles
-                                                            .regWhite10,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        maxLines: 1,
-                                                        child: AnimatedTextKit(
-                                                          totalRepeatCount: 1,
-                                                          animatedTexts: [
-                                                            TyperAnimatedText(
-                                                              homeController
-                                                                  .chats[index]
-                                                                  .question![0],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 2.w,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 4.h,
-                                                      width: 10.w,
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          homeController
-                                                              .deleteQuestion(
-                                                                  homeController
-                                                                          .chats[
-                                                                      index]);
-                                                        },
-                                                        child: Icon(
-                                                          Icons.delete,
-                                                          size: 8.w,
-                                                          color:
-                                                              AppColors.kWhite,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          )
                                         ],
                                       ),
-                                    );
-                                  })),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 4.h,
+                                  child: Text(
+                                    "Previuos Searches",
+                                    style: AppTextStyles.regWhiteBold12,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 62.h,
+                                  child: ListView.builder(
+                                      itemCount: homeController.chats.length,
+                                      itemBuilder: ((context, index) {
+                                        return SizedBox(
+                                          height: 10.h,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 1.h,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.to(() => DetailScreen(
+                                                        chat: homeController
+                                                            .chats[index],
+                                                      ));
+                                                },
+                                                child: Container(
+                                                  height: 8.h,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        width: .2.w,
+                                                        color: AppColors.kWhite),
+                                                    borderRadius:
+                                                        BorderRadius.circular(2.w),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 2.w,
+                                                        right: 2.w,
+                                                        top: 1.w,
+                                                        bottom: 1.w),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 4.h,
+                                                          width: 10.w,
+                                                          child: Icon(
+                                                            Icons.chat_bubble,
+                                                            size: 8.w,
+                                                            color: AppColors.kWhite,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 64.w,
+                                                          child: DefaultTextStyle(
+                                                            style: AppTextStyles
+                                                                .regWhite10,
+                                                            overflow: TextOverflow
+                                                                .ellipsis,
+                                                            maxLines: 1,
+                                                            child: AnimatedTextKit(
+                                                              totalRepeatCount: 1,
+                                                              animatedTexts: [
+                                                                TyperAnimatedText(
+                                                                  homeController
+                                                                      .chats[index]
+                                                                      .question![0],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 4.h,
+                                                          width: 10.w,
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              homeController
+                                                                  .deleteQuestion(
+                                                                      homeController
+                                                                              .chats[
+                                                                          index]);
+                                                            },
+                                                            child: Icon(
+                                                              Icons.delete,
+                                                              size: 8.w,
+                                                              color:
+                                                                  AppColors.kWhite,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 1.h,
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      })),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                ),
-              );
-            }),
+                    ),
+                  );
+                }),
+              Container(
+            color: Colors.white,
+            child: Center(
+              child: Builder(builder: (BuildContext context) {
+                openImageScanner(context);
+                return Container();
+              }),
+            ),
+          ),
+              ],
+            ),
           );
   }
 }
