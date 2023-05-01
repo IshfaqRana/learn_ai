@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learn_ai/utils/theme.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../data/models/chat_model.dart';
@@ -18,10 +19,13 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.hardBlue,
+      backgroundColor: !darkThemePreference.darkMode.value
+          ? AppColors.kWhite
+          : AppColors.hardBlue,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: InkWell(
@@ -34,7 +38,9 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Image.asset(AppImages.back, color: AppColors.kWhite),
             ),
           ),
-          backgroundColor: AppColors.kGrey,
+          backgroundColor: !darkThemePreference.darkMode.value
+              ? AppColors.kBlack2
+              : AppColors.kGrey,
           centerTitle: false,
           title: Text(
             "Answer",
@@ -52,7 +58,9 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFF616D7E),
+                          color: !darkThemePreference.darkMode.value
+                              ? Color(0xFFC9C9C9)
+                              : Color(0xFF616D7E),
                           borderRadius: BorderRadius.circular(1.h),
                           boxShadow: [
                             BoxShadow(
@@ -71,21 +79,34 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(1.h),
-                          child: DefaultTextStyle(
-                            style: AppTextStyles.regWhiteBold12,
-                            child: AnimatedTextKit(
-                              totalRepeatCount: 1,
-                              animatedTexts: [
-                                TyperAnimatedText(
-                                  widget.chat.question![index],
-                                ),
-                              ],
+                          child:
+                              // DefaultTextStyle(
+                              //   style: !darkThemePreference.darkMode.value
+                              //       ? AppTextStyles.regBlack12Bold
+                              //       : AppTextStyles.regWhiteBold12,
+                              //   child:                             AnimatedTextKit(
+                              //     totalRepeatCount: 1,
+                              //     animatedTexts: [
+                              //       TyperAnimatedText(
+                              //         widget.chat.question![index],
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              SelectableText(
+                            widget.chat.question![index],
+                            style: !darkThemePreference.darkMode.value
+                                ? AppTextStyles.regBlack12Bold
+                                : AppTextStyles.regWhiteBold12,
+                            toolbarOptions: ToolbarOptions(
+                              copy: true,
+                              selectAll: true,
                             ),
+                            showCursor: true,
+                            cursorWidth: 2,
+                            cursorColor: Colors.red,
+                            cursorRadius: Radius.circular(5),
                           ),
-                          // Text(
-                          //   widget.chat.question![index],
-                          //   style: AppTextStyles.regWhiteBold12,
-                          // ),
                         ),
                       ),
                     );

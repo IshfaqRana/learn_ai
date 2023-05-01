@@ -11,6 +11,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
+import '../../../utils/theme.dart';
 import '../home/home_view.dart';
 import '../login/login_view.dart';
 
@@ -27,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, route);
   }
 
+  DarkThemePreference darkThemePreference = DarkThemePreference();
+
   route() {
     Navigator.pushReplacement(
         context,
@@ -42,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
       login = true;
     } else {
       databases();
+      darkThemePreference.setDarkTheme(true);
     }
   }
 
@@ -67,6 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    darkThemePreference.getTheme();
     checkUser();
     startTime();
     super.initState();

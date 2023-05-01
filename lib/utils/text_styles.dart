@@ -14,7 +14,7 @@ class AppTextStyles {
       fontFamily: AppFont.sFDisplayLight);
 
   static TextStyle regBlack10 = TextStyle(
-    color: AppColors.kBlack2,
+    color: AppColors.kBlack,
     fontSize: 10.sp,
     fontWeight: FontWeight.w300,
     fontFamily: AppFont.sFDisplayLight,

@@ -8,11 +8,13 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../data/apis/api_calls.dart';
 import '../../../data/models/chat_model.dart';
+import '../../../utils/theme.dart';
 import '../answer_screen/detail_screen.dart';
 
 class HomeController extends GetxController {
   RxBool loading = false.obs;
   RxBool isLoading = false.obs;
+  RxBool isDark = false.obs;
   Rx<UserChats> userChats = UserChats(chats: []).obs;
   RxList<ChatModel> chats = [ChatModel(question: [], id: 0)].obs;
   int id = 0;
@@ -23,6 +25,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     openDB();
+
     // insertOneSampleData();
     getUserChats();
     super.onInit();

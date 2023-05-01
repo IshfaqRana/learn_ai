@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final double? width;
+  final TextStyle style;
   final double? height;
   final Color color;
   final bool loading;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.height,
     required this.color,
+    required this.style,
     this.loading = false,
   }) : super(key: key);
 
@@ -35,7 +37,7 @@ class CustomButton extends StatelessWidget {
                 ? Utils().loader()
                 : Text(
                     text,
-                    style: AppTextStyles.regWhiteBold12,
+                    style: style,
                     maxLines: 1,
                     textAlign: TextAlign.center,
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learn_ai/utils/theme.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
@@ -16,6 +17,7 @@ class ForgetPassword extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   ForgetPasswordController forgetPasswordController =
       Get.put(ForgetPasswordController());
+  DarkThemePreference darkThemePreference = DarkThemePreference();
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +136,10 @@ class ForgetPassword extends StatelessWidget {
                     height: 5.h,
                   ),
                   CustomButton(
-                    color: AppColors.lightBlue,
+                    color: !darkThemePreference.darkMode.value
+                        ? AppColors.kGrey
+                        : AppColors.lightBlue,
+                    style: AppTextStyles.regWhiteBold12,
                     text: "Submit",
                     height: 5.4.h,
                     loading: forgetPasswordController.loading.value,

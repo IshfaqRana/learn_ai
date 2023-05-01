@@ -15,6 +15,7 @@ import 'package:sizer/sizer.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
+import '../../../utils/theme.dart';
 import '../../widgets/curved_app_bar.dart';
 import '../answer_screen/detail_screen.dart';
 import '../login/login_view.dart';
@@ -31,6 +32,7 @@ class _HomePageViewState extends State<HomePageView>
   late TabController _tabController;
   late PageController pageController;
   HomeController homeController = Get.put(HomeController());
+  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
   File? scannedImage;
 
   @override
@@ -121,7 +123,9 @@ class _HomePageViewState extends State<HomePageView>
         height: 15,
         width: 15,
         child: LoadingAnimationWidget.staggeredDotsWave(
-          color: Colors.white,
+          color: darkThemePreference.darkMode.value
+              ? Colors.white
+              : AppColors.lightBlue,
           // rightDotColor: Colors.yellow,
           size: 10.w,
         ),
@@ -138,80 +142,124 @@ class _HomePageViewState extends State<HomePageView>
 
   @override
   Widget build(BuildContext context) {
-    return homeController.loading.value
-        ? Scaffold(
-            backgroundColor: AppColors.hardBlue,
-            body:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Center(child: SizedBox(height: 5.h, width: 5.h, child: loader()))
-            ]),
-          )
-        : Scaffold(
-            backgroundColor: AppColors.hardBlue,
-            // floatingActionButton: FloatingActionButton.extended(
-            //   backgroundColor: AppColors.lightBlue,
-            //   // foregroundColor: Colors.black,
-            //   onPressed: () {
-            //     openImageScanner(context);
-            //   },
-            //   icon: Icon(
-            //     Icons.camera_alt,
-            //     size: 6.w,
-            //     color: AppColors.kWhite,
-            //   ),
-            //   label: const Text('Scan Assignment'),
-            // ),
+    return Obx(() {
+      return homeController.loading.value
+          ? Scaffold(
+              backgroundColor: !darkThemePreference.darkMode.value
+                  ? AppColors.kWhite
+                  : AppColors.hardBlue,
+              body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                        child:
+                            SizedBox(height: 5.h, width: 5.h, child: loader()))
+                  ]),
+            )
+          : Scaffold(
+              backgroundColor: !darkThemePreference.darkMode.value
+                  ? AppColors.kWhite
+                  : AppColors.hardBlue,
+              // floatingActionButton: FloatingActionButton.extended(
+              //   backgroundColor: AppColors.lightBlue,
+              //   // foregroundColor: Colors.black,
+              //   onPressed: () {
+              //     openImageScanner(context);
+              //   },
+              //   icon: Icon(
+              //     Icons.camera_alt,
+              //     size: 6.w,
+              //     color: AppColors.kWhite,
+              //   ),
+              //   label: const Text('Scan Assignment'),
+              // ),
 
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(kToolbarHeight + 100),
-              child: AppBar(
-                backgroundColor: AppColors.hardBlue,
-                flexibleSpace: ClipPath(
-                  clipper: CustomAppBarClipper(),
-                  child: Container(color: AppColors.kGrey),
-                ),
-                centerTitle: false,
-                title: Text(
-                  "Learn AI",
-                  style: AppTextStyles.regWhiteBold20,
-                ),
-                elevation: 0,
-                actions: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 2.5.w, left: 2.5.w, right: 4.w, bottom: 2.5.w),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.lightBlue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.h),
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(kToolbarHeight + 100),
+                child: AppBar(
+                  backgroundColor: !darkThemePreference.darkMode.value
+                      ? AppColors.kWhite
+                      : AppColors.hardBlue,
+                  flexibleSpace: ClipPath(
+                    clipper: CustomAppBarClipper(),
+                    child: Container(
+                        color: !darkThemePreference.darkMode.value
+                            ? AppColors.kBlack2
+                            : AppColors.kGrey),
+                  ),
+                  centerTitle: false,
+                  title: Text(
+                    "Learn AI",
+                    style: AppTextStyles.regWhiteBold20,
+                  ),
+                  elevation: 0,
+                  actions: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 2.5.w, left: 2.w, right: 1.w, bottom: 2.5.w),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: !darkThemePreference.darkMode.value
+                              ? AppColors.kGrey
+                              : AppColors.lightBlue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.h),
+                          ),
                         ),
-                      ),
-                      onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.clear();
-                        Get.offAll(() => LoginView());
-                      },
-                      child: Text(
-                        'Logout',
-                        style: TextStyle(
-                          color: AppColors.kWhite,
-                          fontSize: 16.0,
+                        onPressed: () async {
+                          if (darkThemePreference.darkMode.value) {
+                            darkThemePreference.setDarkTheme(false);
+                          } else {
+                            darkThemePreference.setDarkTheme(true);
+                          }
+                        },
+                        child: Text(
+                          !darkThemePreference.darkMode.value
+                              ? 'Dark'
+                              : "Light",
+                          style: TextStyle(
+                            color: AppColors.kWhite,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-                automaticallyImplyLeading: false,
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 2.5.w, left: 2.w, right: 4.w, bottom: 2.5.w),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: !darkThemePreference.darkMode.value
+                              ? AppColors.kGrey
+                              : AppColors.lightBlue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.h),
+                          ),
+                        ),
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.clear();
+                          Get.offAll(() => LoginView());
+                        },
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: AppColors.kWhite,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  automaticallyImplyLeading: false,
+                ),
               ),
-            ),
 
-            body: PageView(
-              controller: pageController,
-              children: [
-                Obx(() {
-                  return Stack(
+              body: PageView(
+                controller: pageController,
+                children: [
+                  Stack(
                     children: [
                       SizedBox(
                         child: Padding(
@@ -225,14 +273,20 @@ class _HomePageViewState extends State<HomePageView>
                                       height: 4.h,
                                       child: Text(
                                         "Previuos Searches",
-                                        style: AppTextStyles.regWhiteBold12,
+                                        style:
+                                            !darkThemePreference.darkMode.value
+                                                ? AppTextStyles.regBlack12Bold
+                                                : AppTextStyles.regWhiteBold12,
                                       ),
                                     ),
                                     SizedBox(
                                       height: 62.h,
                                       child: Center(
                                         child: DefaultTextStyle(
-                                          style: AppTextStyles.regWhite10Bold,
+                                          style: !darkThemePreference
+                                                  .darkMode.value
+                                              ? AppTextStyles.regBlack10Bold
+                                              : AppTextStyles.regWhite10Bold,
                                           child: AnimatedTextKit(
                                             totalRepeatCount: 1,
                                             animatedTexts: [
@@ -253,7 +307,10 @@ class _HomePageViewState extends State<HomePageView>
                                       height: 4.h,
                                       child: Text(
                                         "Previuos Searches",
-                                        style: AppTextStyles.regWhiteBold12,
+                                        style:
+                                            !darkThemePreference.darkMode.value
+                                                ? AppTextStyles.regBlack12Bold
+                                                : AppTextStyles.regWhiteBold12,
                                         textAlign: TextAlign.start,
                                       ),
                                     ),
@@ -280,10 +337,25 @@ class _HomePageViewState extends State<HomePageView>
                                                     child: Container(
                                                       height: 8.h,
                                                       decoration: BoxDecoration(
+                                                        color:
+                                                            darkThemePreference
+                                                                    .darkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .hardBlue
+                                                                : Color(
+                                                                    0xFFC9C9C9),
                                                         border: Border.all(
-                                                            width: .2.w,
-                                                            color: AppColors
-                                                                .kWhite),
+                                                          width: .2.w,
+                                                          color:
+                                                              !darkThemePreference
+                                                                      .darkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .kBlack2
+                                                                  : AppColors
+                                                                      .kWhite,
+                                                        ),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(2.w),
@@ -304,8 +376,13 @@ class _HomePageViewState extends State<HomePageView>
                                                                 Icons
                                                                     .chat_bubble,
                                                                 size: 8.w,
-                                                                color: AppColors
-                                                                    .kWhite,
+                                                                color: !darkThemePreference
+                                                                        .darkMode
+                                                                        .value
+                                                                    ? AppColors
+                                                                        .kBlack
+                                                                    : AppColors
+                                                                        .kWhite,
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -315,8 +392,13 @@ class _HomePageViewState extends State<HomePageView>
                                                               width: 64.w,
                                                               child:
                                                                   DefaultTextStyle(
-                                                                style: AppTextStyles
-                                                                    .regWhite10,
+                                                                style: !darkThemePreference
+                                                                        .darkMode
+                                                                        .value
+                                                                    ? AppTextStyles
+                                                                        .regBlack10
+                                                                    : AppTextStyles
+                                                                        .regWhite10,
                                                                 overflow:
                                                                     TextOverflow
                                                                         .ellipsis,
@@ -352,8 +434,13 @@ class _HomePageViewState extends State<HomePageView>
                                                                 child: Icon(
                                                                   Icons.delete,
                                                                   size: 8.w,
-                                                                  color: AppColors
-                                                                      .kWhite,
+                                                                  color: !darkThemePreference
+                                                                          .darkMode
+                                                                          .value
+                                                                      ? AppColors
+                                                                          .kBlack
+                                                                      : AppColors
+                                                                          .kWhite,
                                                                 ),
                                                               ),
                                                             ),
@@ -380,35 +467,41 @@ class _HomePageViewState extends State<HomePageView>
                             height: 8.h,
                             child: Text(
                               "Swipe left to Scan Document >>>",
-                              style: AppTextStyles.regWhiteBold12,
+                              style: !darkThemePreference.darkMode.value
+                                  ? AppTextStyles.regBlack12Bold
+                                  : AppTextStyles.regWhiteBold12,
                             ),
                           ))
                     ],
-                  );
-                }),
-                Container(
-                  color: AppColors.hardBlue,
-                  child: Center(
-                    child: Builder(builder: (BuildContext context) {
-                      openImageScanner(context);
-                      return Stack(
-                        children: [
-                          Align(
-                              alignment: Alignment.bottomCenter,
-                              child: SizedBox(
-                                height: 8.h,
-                                child: Text(
-                                  "<<< Swipe Right for Home Page",
-                                  style: AppTextStyles.regWhiteBold12,
-                                ),
-                              ))
-                        ],
-                      );
-                    }),
                   ),
-                ),
-              ],
-            ),
-          );
+                  Container(
+                    color: !darkThemePreference.darkMode.value
+                        ? AppColors.kWhite
+                        : AppColors.hardBlue,
+                    child: Center(
+                      child: Builder(builder: (BuildContext context) {
+                        openImageScanner(context);
+                        return Stack(
+                          children: [
+                            Align(
+                                alignment: Alignment.bottomCenter,
+                                child: SizedBox(
+                                  height: 8.h,
+                                  child: Text(
+                                    "<<< Swipe Right for Home Page",
+                                    style: !darkThemePreference.darkMode.value
+                                        ? AppTextStyles.regBlack12Bold
+                                        : AppTextStyles.regWhiteBold12,
+                                  ),
+                                ))
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            );
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:learn_ai/presentations/screens/login/login_controller.dart';
+import 'package:learn_ai/utils/theme.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
@@ -18,12 +19,15 @@ class LoginView extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   LoginController loginController = Get.put(LoginController());
+  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: AppColors.hardBlue,
+        backgroundColor: !darkThemePreference.darkMode.value
+            ? AppColors.kWhite
+            : AppColors.hardBlue,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -50,7 +54,9 @@ class LoginView extends StatelessWidget {
                     width: 70.0.w,
                     child: Text(
                       "Let’s sign you In!",
-                      style: AppTextStyles.regWhiteBold15,
+                      style: !darkThemePreference.darkMode.value
+                          ? AppTextStyles.regBlack15Bold
+                          : AppTextStyles.regWhiteBold15,
                     ),
                   ),
                   SizedBox(
@@ -59,7 +65,9 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: AppColors.kGrey,
+                      color: !darkThemePreference.darkMode.value
+                          ? AppColors.kWhite
+                          : AppColors.kGrey,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(1.0.h),
                           topRight: Radius.circular(1.0.h)),
@@ -91,7 +99,9 @@ class LoginView extends StatelessWidget {
                             Ionicons.person_outline,
                             //CupertinoIcons.person,
                             size: 3.8.w,
-                            color: AppColors.kWhite,
+                            color: !darkThemePreference.darkMode.value
+                                ? AppColors.kBlack2
+                                : AppColors.kWhite,
                           ),
                         ),
                         SizedBox(
@@ -102,7 +112,9 @@ class LoginView extends StatelessWidget {
                           width: 68.w,
                           child: TextField(
                               //textAlign: TextAlign.start,
-                              style: AppTextStyles.regWhiteTextField12,
+                              style: !darkThemePreference.darkMode.value
+                                  ? AppTextStyles.regBlackTextField12
+                                  : AppTextStyles.regWhiteTextField12,
                               maxLines: 1,
                               controller: emailController,
                               decoration: InputDecoration.collapsed(
@@ -111,7 +123,9 @@ class LoginView extends StatelessWidget {
                                 hintText: "Email",
 
                                 border: InputBorder.none,
-                                hintStyle: AppTextStyles.regWhiteTextField12,
+                                hintStyle: !darkThemePreference.darkMode.value
+                                    ? AppTextStyles.regBlackTextField12
+                                    : AppTextStyles.regWhiteTextField12,
                               )),
                         ),
                       ],
@@ -123,7 +137,9 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: AppColors.kGrey,
+                      color: !darkThemePreference.darkMode.value
+                          ? AppColors.kWhite
+                          : AppColors.kGrey,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(1.0.h),
                           bottomRight: Radius.circular(1.0.h)),
@@ -155,7 +171,9 @@ class LoginView extends StatelessWidget {
                               child: Icon(
                                 Icons.lock_outlined,
                                 size: 4.w,
-                                color: AppColors.kWhite,
+                                color: !darkThemePreference.darkMode.value
+                                    ? AppColors.kBlack2
+                                    : AppColors.kWhite,
                               )),
                           SizedBox(
                             width: 4.w,
@@ -165,14 +183,18 @@ class LoginView extends StatelessWidget {
                             width: 68.w,
                             child: TextField(
                                 maxLines: 1,
-                                style: AppTextStyles.regWhiteTextField12,
+                                style: !darkThemePreference.darkMode.value
+                                    ? AppTextStyles.regBlackTextField12
+                                    : AppTextStyles.regWhiteTextField12,
                                 obscureText: loginController.visible.value,
                                 controller: passwordController,
                                 textAlignVertical: TextAlignVertical.center,
                                 decoration: InputDecoration.collapsed(
                                   hintText: "Password",
                                   border: InputBorder.none,
-                                  hintStyle: AppTextStyles.regWhiteTextField12,
+                                  hintStyle: !darkThemePreference.darkMode.value
+                                      ? AppTextStyles.regBlackTextField12
+                                      : AppTextStyles.regWhiteTextField12,
 
                                   // suffix: SizedBox(
                                   //     height: 1.h,
@@ -196,6 +218,7 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility_off,
                                       size: 5.w,
+                                      color: AppColors.kBlack2,
                                     ))
                                 : InkWell(
                                     onTap: () {
@@ -204,6 +227,7 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility,
                                       size: 5.w,
+                                      color: AppColors.kBlack2,
                                     ),
                                   ),
                           )
@@ -236,7 +260,10 @@ class LoginView extends StatelessWidget {
                     height: 5.h,
                   ),
                   CustomButton(
-                    color: AppColors.lightBlue,
+                    color: !darkThemePreference.darkMode.value
+                        ? AppColors.kBlack2
+                        : AppColors.lightBlue,
+                    style: AppTextStyles.regWhiteBold12,
                     text: "Sign In",
                     height: 5.4.h,
                     loading: loginController.loading.value,
@@ -265,7 +292,9 @@ class LoginView extends StatelessWidget {
                             maxLines: 1,
                             text: TextSpan(
                                 text: 'Don`t have an account? ',
-                                style: AppTextStyles.regWhite10Bold,
+                                style: !darkThemePreference.darkMode.value
+                                    ? AppTextStyles.regBlack10Bold
+                                    : AppTextStyles.regWhite10Bold,
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: 'Sign Up',
