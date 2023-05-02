@@ -25,7 +25,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       backgroundColor: !darkThemePreference.darkMode.value
           ? AppColors.kWhite
-          : AppColors.hardBlue,
+          : AppColors.kBlack2,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: InkWell(
@@ -35,16 +35,21 @@ class _DetailScreenState extends State<DetailScreen> {
             child: SizedBox(
               height: 3.h,
               width: 5.w,
-              child: Image.asset(AppImages.back, color: AppColors.kWhite),
+              child: Image.asset(AppImages.back,
+                  color: !darkThemePreference.darkMode.value
+                      ? AppColors.kBlack
+                      : AppColors.kWhite),
             ),
           ),
           backgroundColor: !darkThemePreference.darkMode.value
-              ? AppColors.kBlack2
-              : AppColors.kGrey,
+              ? AppColors.kGrey4
+              : AppColors.kText2,
           centerTitle: false,
           title: Text(
             "Answer",
-            style: AppTextStyles.regWhiteBold15,
+            style: darkThemePreference.darkMode.value
+                ? AppTextStyles.regWhiteBold15
+                : AppTextStyles.regBlack15Bold,
           )),
       body: Padding(
         padding: EdgeInsets.all(0.5.h),
@@ -59,8 +64,10 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: !darkThemePreference.darkMode.value
-                              ? Color(0xFFC9C9C9)
-                              : Color(0xFF616D7E),
+                              ? AppColors.kGreyToWhite
+                              : AppColors.kText2,
+
+                          // : Color(0xFF616D7E),
                           borderRadius: BorderRadius.circular(1.h),
                           boxShadow: [
                             BoxShadow(

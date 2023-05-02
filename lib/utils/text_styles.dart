@@ -205,8 +205,18 @@ class AppTextStyles {
       fontSize: 12.sp,
       fontWeight: FontWeight.bold,
       fontFamily: AppFont.sFDisplaySemibold);
+  static TextStyle regLightWhiteBold12 = TextStyle(
+      color: AppColors.kGreyToWhite,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.bold,
+      fontFamily: AppFont.sFDisplaySemibold);
   static TextStyle regWhiteBold20 = TextStyle(
       color: AppColors.kWhite,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.bold,
+      fontFamily: AppFont.sFDisplayBold);
+  static TextStyle regBlackBold20 = TextStyle(
+      color: AppColors.kBlack,
       fontSize: 20.sp,
       fontWeight: FontWeight.bold,
       fontFamily: AppFont.sFDisplayBold);
@@ -308,7 +318,7 @@ class AppTextStyles {
     fontFamily: AppFont.sFDisplayMedium,
   );
   static TextStyle regGrey12Bold = TextStyle(
-    color: AppColors.kGrey,
+    color: AppColors.kGreyToWhite,
     fontSize: 12.sp,
     fontFamily: AppFont.sFDisplaySemibold,
   );

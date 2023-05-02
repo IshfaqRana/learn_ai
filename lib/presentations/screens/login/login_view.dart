@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
       () => Scaffold(
         backgroundColor: !darkThemePreference.darkMode.value
             ? AppColors.kWhite
-            : AppColors.hardBlue,
+            : AppColors.kBlack2,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -67,7 +67,7 @@ class LoginView extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: !darkThemePreference.darkMode.value
                           ? AppColors.kWhite
-                          : AppColors.kGrey,
+                          : AppColors.kText2,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(1.0.h),
                           topRight: Radius.circular(1.0.h)),
@@ -139,7 +139,7 @@ class LoginView extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: !darkThemePreference.darkMode.value
                           ? AppColors.kWhite
-                          : AppColors.kGrey,
+                          : AppColors.kText2,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(1.0.h),
                           bottomRight: Radius.circular(1.0.h)),
@@ -218,7 +218,9 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility_off,
                                       size: 5.w,
-                                      color: AppColors.kBlack2,
+                                      color: darkThemePreference.darkMode.value
+                                          ? AppColors.kWhite
+                                          : AppColors.kBlack2,
                                     ))
                                 : InkWell(
                                     onTap: () {
@@ -227,7 +229,9 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility,
                                       size: 5.w,
-                                      color: AppColors.kBlack2,
+                                      color: darkThemePreference.darkMode.value
+                                          ? AppColors.kWhite
+                                          : AppColors.kBlack2,
                                     ),
                                   ),
                           )
@@ -261,8 +265,8 @@ class LoginView extends StatelessWidget {
                   ),
                   CustomButton(
                     color: !darkThemePreference.darkMode.value
-                        ? AppColors.kBlack2
-                        : AppColors.lightBlue,
+                        ? AppColors.kText2
+                        : Colors.lightBlue,
                     style: AppTextStyles.regWhiteBold12,
                     text: "Sign In",
                     height: 5.4.h,

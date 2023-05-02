@@ -9,8 +9,10 @@ class AppColors {
   //E3E3E5
 
   static Color kGrey = const Color(0xFF939bb4);
+  static Color kGreyToWhite = const Color(0xFFDDDDDD);
   static Color kGrey2 = const Color(0xFF6D7B8D);
   static Color kGrey3 = const Color(0xFF787878);
+  static Color kGrey4 = const Color(0xFFB3B3B3);
   static Color kLightGrey = const Color(0xFFAAAAAA);
   static Color kText = const Color(0xFF98A2B3);
   static Color blue = const Color(0xFF0000FF);
