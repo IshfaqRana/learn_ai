@@ -270,7 +270,7 @@ class _HomePageViewState extends State<HomePageView>
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 68.h,
+                                      height: 66.h,
                                       child: ListView.builder(
                                           itemCount:
                                               homeController.chats.length,
