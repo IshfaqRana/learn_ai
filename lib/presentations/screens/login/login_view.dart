@@ -19,15 +19,15 @@ class LoginView extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   LoginController loginController = Get.put(LoginController());
-  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool darkThemePreference = brightness == Brightness.dark;
     return Obx(
       () => Scaffold(
-        backgroundColor: !darkThemePreference.darkMode.value
-            ? AppColors.kWhite
-            : AppColors.kBlack2,
+        backgroundColor:
+            !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -54,7 +54,7 @@ class LoginView extends StatelessWidget {
                     width: 70.0.w,
                     child: Text(
                       "Let’s sign you In!",
-                      style: !darkThemePreference.darkMode.value
+                      style: !darkThemePreference
                           ? AppTextStyles.regBlack15Bold
                           : AppTextStyles.regWhiteBold15,
                     ),
@@ -65,7 +65,7 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       borderRadius: BorderRadius.only(
@@ -99,7 +99,7 @@ class LoginView extends StatelessWidget {
                             Ionicons.person_outline,
                             //CupertinoIcons.person,
                             size: 3.8.w,
-                            color: !darkThemePreference.darkMode.value
+                            color: !darkThemePreference
                                 ? AppColors.kBlack2
                                 : AppColors.kWhite,
                           ),
@@ -112,7 +112,7 @@ class LoginView extends StatelessWidget {
                           width: 68.w,
                           child: TextField(
                               //textAlign: TextAlign.start,
-                              style: !darkThemePreference.darkMode.value
+                              style: !darkThemePreference
                                   ? AppTextStyles.regBlackTextField12
                                   : AppTextStyles.regWhiteTextField12,
                               maxLines: 1,
@@ -123,7 +123,7 @@ class LoginView extends StatelessWidget {
                                 hintText: "Email",
 
                                 border: InputBorder.none,
-                                hintStyle: !darkThemePreference.darkMode.value
+                                hintStyle: !darkThemePreference
                                     ? AppTextStyles.regBlackTextField12
                                     : AppTextStyles.regWhiteTextField12,
                               )),
@@ -137,7 +137,7 @@ class LoginView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       borderRadius: BorderRadius.only(
@@ -171,7 +171,7 @@ class LoginView extends StatelessWidget {
                               child: Icon(
                                 Icons.lock_outlined,
                                 size: 4.w,
-                                color: !darkThemePreference.darkMode.value
+                                color: !darkThemePreference
                                     ? AppColors.kBlack2
                                     : AppColors.kWhite,
                               )),
@@ -183,7 +183,7 @@ class LoginView extends StatelessWidget {
                             width: 68.w,
                             child: TextField(
                                 maxLines: 1,
-                                style: !darkThemePreference.darkMode.value
+                                style: !darkThemePreference
                                     ? AppTextStyles.regBlackTextField12
                                     : AppTextStyles.regWhiteTextField12,
                                 obscureText: loginController.visible.value,
@@ -192,7 +192,7 @@ class LoginView extends StatelessWidget {
                                 decoration: InputDecoration.collapsed(
                                   hintText: "Password",
                                   border: InputBorder.none,
-                                  hintStyle: !darkThemePreference.darkMode.value
+                                  hintStyle: !darkThemePreference
                                       ? AppTextStyles.regBlackTextField12
                                       : AppTextStyles.regWhiteTextField12,
 
@@ -218,7 +218,7 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility_off,
                                       size: 5.w,
-                                      color: darkThemePreference.darkMode.value
+                                      color: darkThemePreference
                                           ? AppColors.kWhite
                                           : AppColors.kBlack2,
                                     ))
@@ -229,7 +229,7 @@ class LoginView extends StatelessWidget {
                                     child: Icon(
                                       Icons.visibility,
                                       size: 5.w,
-                                      color: darkThemePreference.darkMode.value
+                                      color: darkThemePreference
                                           ? AppColors.kWhite
                                           : AppColors.kBlack2,
                                     ),
@@ -264,9 +264,9 @@ class LoginView extends StatelessWidget {
                     height: 5.h,
                   ),
                   CustomButton(
-                    color: !darkThemePreference.darkMode.value
+                    color: !darkThemePreference
                         ? AppColors.kText2
-                        : Colors.lightBlue,
+                        : AppColors.kText,
                     style: AppTextStyles.regWhiteBold12,
                     text: "Sign In",
                     height: 5.4.h,
@@ -296,7 +296,7 @@ class LoginView extends StatelessWidget {
                             maxLines: 1,
                             text: TextSpan(
                                 text: 'Don`t have an account? ',
-                                style: !darkThemePreference.darkMode.value
+                                style: !darkThemePreference
                                     ? AppTextStyles.regBlack10Bold
                                     : AppTextStyles.regWhite10Bold,
                                 children: <TextSpan>[

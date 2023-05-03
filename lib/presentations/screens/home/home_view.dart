@@ -32,7 +32,7 @@ class _HomePageViewState extends State<HomePageView>
   late TabController _tabController;
   late PageController pageController;
   HomeController homeController = Get.put(HomeController());
-  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
+
   File? scannedImage;
 
   @override
@@ -119,13 +119,11 @@ class _HomePageViewState extends State<HomePageView>
     }
   }
 
-  loader() => SizedBox(
+  loader(darkThemePreference) => SizedBox(
         height: 15,
         width: 15,
         child: LoadingAnimationWidget.staggeredDotsWave(
-          color: darkThemePreference.darkMode.value
-              ? Colors.white
-              : AppColors.lightBlue,
+          color: darkThemePreference ? Colors.white : AppColors.lightBlue,
           // rightDotColor: Colors.yellow,
           size: 10.w,
         ),
@@ -142,34 +140,36 @@ class _HomePageViewState extends State<HomePageView>
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool darkThemePreference = brightness == Brightness.dark;
     return Obx(() {
       return homeController.loading.value
           ? Scaffold(
-              backgroundColor: !darkThemePreference.darkMode.value
-                  ? AppColors.kWhite
-                  : AppColors.kBlack2,
+              backgroundColor:
+                  !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
-                        child:
-                            SizedBox(height: 5.h, width: 5.h, child: loader()))
+                        child: SizedBox(
+                            height: 5.h,
+                            width: 5.h,
+                            child: loader(darkThemePreference)))
                   ]),
             )
           : Scaffold(
-              backgroundColor: !darkThemePreference.darkMode.value
-                  ? AppColors.kWhite
-                  : AppColors.kBlack2,
+              backgroundColor:
+                  !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
               appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(kToolbarHeight + 100),
                 child: AppBar(
-                  backgroundColor: !darkThemePreference.darkMode.value
+                  backgroundColor: !darkThemePreference
                       ? AppColors.kWhite
                       : AppColors.kBlack2,
                   flexibleSpace: ClipPath(
                     clipper: CustomAppBarClipper(),
                     child: Container(
-                      color: darkThemePreference.darkMode.value
+                      color: darkThemePreference
                           ? AppColors.kText2
                           : AppColors.kGrey4,
                     ),
@@ -177,7 +177,7 @@ class _HomePageViewState extends State<HomePageView>
                   centerTitle: false,
                   title: Text(
                     "Learn AI",
-                    style: !darkThemePreference.darkMode.value
+                    style: !darkThemePreference
                         ? AppTextStyles.regBlackBold20
                         : AppTextStyles.regWhiteBold20,
                   ),
@@ -185,40 +185,10 @@ class _HomePageViewState extends State<HomePageView>
                   actions: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(
-                          top: 2.5.w, left: 2.w, right: 1.w, bottom: 2.5.w),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: !darkThemePreference.darkMode.value
-                              ? AppColors.kText2
-                              : AppColors.kGrey3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.h),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (darkThemePreference.darkMode.value) {
-                            darkThemePreference.setDarkTheme(false);
-                          } else {
-                            darkThemePreference.setDarkTheme(true);
-                          }
-                        },
-                        child: Text(
-                          !darkThemePreference.darkMode.value
-                              ? 'Dark'
-                              : "Light",
-                          style: TextStyle(
-                            color: AppColors.kWhite,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
                           top: 2.5.w, left: 2.w, right: 4.w, bottom: 2.5.w),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: !darkThemePreference.darkMode.value
+                          backgroundColor: !darkThemePreference
                               ? AppColors.kText2
                               : AppColors.kGrey3,
                           shape: RoundedRectangleBorder(
@@ -261,10 +231,9 @@ class _HomePageViewState extends State<HomePageView>
                                       height: 4.h,
                                       child: Text(
                                         "Previuos Searches",
-                                        style:
-                                            !darkThemePreference.darkMode.value
-                                                ? AppTextStyles.regBlack12Bold
-                                                : AppTextStyles.regWhiteBold12,
+                                        style: !darkThemePreference
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regWhiteBold12,
                                       ),
                                     ),
                                     SizedBox(
@@ -272,7 +241,6 @@ class _HomePageViewState extends State<HomePageView>
                                       child: Center(
                                         child: DefaultTextStyle(
                                           style: !darkThemePreference
-                                                  .darkMode.value
                                               ? AppTextStyles.regBlack10Bold
                                               : AppTextStyles.regWhite10Bold,
                                           child: AnimatedTextKit(
@@ -295,10 +263,9 @@ class _HomePageViewState extends State<HomePageView>
                                       height: 4.h,
                                       child: Text(
                                         "Previuos Searches",
-                                        style:
-                                            !darkThemePreference.darkMode.value
-                                                ? AppTextStyles.regBlack12Bold
-                                                : AppTextStyles.regWhiteBold12,
+                                        style: !darkThemePreference
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regWhiteBold12,
                                         textAlign: TextAlign.start,
                                       ),
                                     ),
@@ -326,7 +293,6 @@ class _HomePageViewState extends State<HomePageView>
                                                       height: 8.h,
                                                       decoration: BoxDecoration(
                                                         color: darkThemePreference
-                                                                .darkMode.value
                                                             ? AppColors.kBlack2
                                                             : AppColors
                                                                 .kGreyToWhite,
@@ -334,8 +300,6 @@ class _HomePageViewState extends State<HomePageView>
                                                           width: .2.w,
                                                           color:
                                                               !darkThemePreference
-                                                                      .darkMode
-                                                                      .value
                                                                   ? AppColors
                                                                       .kText2
                                                                   : AppColors
@@ -362,8 +326,6 @@ class _HomePageViewState extends State<HomePageView>
                                                                       .chat_bubble,
                                                                   size: 8.w,
                                                                   color: !darkThemePreference
-                                                                          .darkMode
-                                                                          .value
                                                                       ? AppColors
                                                                           .kText2
                                                                       : AppColors
@@ -377,8 +339,6 @@ class _HomePageViewState extends State<HomePageView>
                                                               child:
                                                                   DefaultTextStyle(
                                                                 style: !darkThemePreference
-                                                                        .darkMode
-                                                                        .value
                                                                     ? AppTextStyles
                                                                         .regBlack10
                                                                     : AppTextStyles
@@ -419,8 +379,6 @@ class _HomePageViewState extends State<HomePageView>
                                                                   Icons.delete,
                                                                   size: 8.w,
                                                                   color: !darkThemePreference
-                                                                          .darkMode
-                                                                          .value
                                                                       ? AppColors
                                                                           .kText2
                                                                       : AppColors
@@ -451,7 +409,7 @@ class _HomePageViewState extends State<HomePageView>
                             height: 8.h,
                             child: Text(
                               "Swipe left to Scan Document >>>",
-                              style: !darkThemePreference.darkMode.value
+                              style: !darkThemePreference
                                   ? AppTextStyles.regBlack12Bold
                                   : AppTextStyles.regGrey12Bold,
                             ),
@@ -459,7 +417,7 @@ class _HomePageViewState extends State<HomePageView>
                     ],
                   ),
                   Container(
-                    color: !darkThemePreference.darkMode.value
+                    color: !darkThemePreference
                         ? AppColors.kWhite
                         : AppColors.kBlack2,
                     child: Center(
@@ -473,7 +431,7 @@ class _HomePageViewState extends State<HomePageView>
                                   height: 8.h,
                                   child: Text(
                                     "<<< Swipe Right for Home Page",
-                                    style: !darkThemePreference.darkMode.value
+                                    style: !darkThemePreference
                                         ? AppTextStyles.regBlack12Bold
                                         : AppTextStyles.regGrey12Bold,
                                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../utils/app_colors.dart';
 import '../../utils/app_utils.dart';
 import '../../utils/text_styles.dart';
 
@@ -31,7 +32,10 @@ class CustomButton extends StatelessWidget {
       child: Container(
           height: height,
           decoration: BoxDecoration(
-              color: color, borderRadius: BorderRadius.circular(1.0.h)),
+            color: color,
+            borderRadius: BorderRadius.circular(1.0.h),
+            // border: Border.all(width: .2.w, color: AppColors.kGreyToWhite),
+          ),
           child: Center(
             child: loading
                 ? Utils().loader()

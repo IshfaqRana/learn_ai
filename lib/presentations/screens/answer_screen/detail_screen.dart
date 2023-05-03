@@ -19,13 +19,18 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool darkThemePreference = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: !darkThemePreference.darkMode.value
-          ? AppColors.kWhite
-          : AppColors.kBlack2,
+      backgroundColor:
+          !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: InkWell(
@@ -36,18 +41,17 @@ class _DetailScreenState extends State<DetailScreen> {
               height: 3.h,
               width: 5.w,
               child: Image.asset(AppImages.back,
-                  color: !darkThemePreference.darkMode.value
+                  color: !darkThemePreference
                       ? AppColors.kBlack
                       : AppColors.kWhite),
             ),
           ),
-          backgroundColor: !darkThemePreference.darkMode.value
-              ? AppColors.kGrey4
-              : AppColors.kText2,
+          backgroundColor:
+              !darkThemePreference ? AppColors.kGrey4 : AppColors.kText2,
           centerTitle: false,
           title: Text(
             "Answer",
-            style: darkThemePreference.darkMode.value
+            style: darkThemePreference
                 ? AppTextStyles.regWhiteBold15
                 : AppTextStyles.regBlack15Bold,
           )),
@@ -63,7 +67,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: !darkThemePreference.darkMode.value
+                          color: !darkThemePreference
                               ? AppColors.kGreyToWhite
                               : AppColors.kText2,
 
@@ -88,7 +92,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: EdgeInsets.all(1.h),
                           child:
                               // DefaultTextStyle(
-                              //   style: !darkThemePreference.darkMode.value
+                              //   style: !darkThemePreference
                               //       ? AppTextStyles.regBlack12Bold
                               //       : AppTextStyles.regWhiteBold12,
                               //   child:                             AnimatedTextKit(
@@ -102,7 +106,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               // ),
                               SelectableText(
                             widget.chat.question![index],
-                            style: !darkThemePreference.darkMode.value
+                            style: !darkThemePreference
                                 ? AppTextStyles.regBlack12Bold
                                 : AppTextStyles.regWhiteBold12,
                             toolbarOptions: ToolbarOptions(

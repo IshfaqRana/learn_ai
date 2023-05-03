@@ -23,15 +23,15 @@ class SignupView extends StatelessWidget {
   TextEditingController confirmController = TextEditingController();
 
   SignupController signupController = Get.put(SignupController());
-  DarkThemePreference darkThemePreference = Get.put(DarkThemePreference());
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool darkThemePreference = brightness == Brightness.dark;
     return Obx(
       () => Scaffold(
-        backgroundColor: !darkThemePreference.darkMode.value
-            ? AppColors.kWhite
-            : AppColors.kBlack2,
+        backgroundColor:
+            !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -47,7 +47,7 @@ class SignupView extends StatelessWidget {
                       height: 3.h,
                       width: 1.5.h,
                       child: Image.asset(AppImages.back,
-                          color: !darkThemePreference.darkMode.value
+                          color: !darkThemePreference
                               ? AppColors.kBlack2
                               : AppColors.kWhite),
                     ),
@@ -71,7 +71,7 @@ class SignupView extends StatelessWidget {
                     width: 70.0.w,
                     child: Text(
                       "Sign Up",
-                      style: !darkThemePreference.darkMode.value
+                      style: !darkThemePreference
                           ? AppTextStyles.regBlack20Medium
                           : AppTextStyles.regWhiteBold20,
                     ),
@@ -82,7 +82,7 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       borderRadius: BorderRadius.only(
@@ -90,7 +90,7 @@ class SignupView extends StatelessWidget {
                           topRight: Radius.circular(1.0.h)),
                       border: signupController.username.value
                           ? Border.all(
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.red
                                   : Colors.greenAccent,
                               width: 0.5.w)
@@ -122,7 +122,7 @@ class SignupView extends StatelessWidget {
                             child: Icon(
                               Icons.person,
                               size: 4.w,
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.kBlack2
                                   : AppColors.kWhite,
                             )),
@@ -133,7 +133,7 @@ class SignupView extends StatelessWidget {
                         SizedBox(
                           width: 68.w,
                           child: TextField(
-                            style: !darkThemePreference.darkMode.value
+                            style: !darkThemePreference
                                 ? AppTextStyles.regBlackTextField12
                                 : AppTextStyles.regWhiteTextField12,
                             maxLines: 1,
@@ -141,7 +141,7 @@ class SignupView extends StatelessWidget {
                             decoration: InputDecoration.collapsed(
                               hintText: "Username",
                               border: InputBorder.none,
-                              hintStyle: !darkThemePreference.darkMode.value
+                              hintStyle: !darkThemePreference
                                   ? AppTextStyles.regBlackTextField12
                                   : AppTextStyles.regWhiteTextField12,
                             ),
@@ -159,7 +159,7 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       // borderRadius: BorderRadius.only(
@@ -167,7 +167,7 @@ class SignupView extends StatelessWidget {
                       //     topRight: Radius.circular(1.0.h)),
                       border: signupController.email.value
                           ? Border.all(
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.red
                                   : Colors.greenAccent,
                               width: 0.5.w)
@@ -199,7 +199,7 @@ class SignupView extends StatelessWidget {
                             child: Icon(
                               Icons.email_outlined,
                               size: 4.w,
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.kBlack2
                                   : AppColors.kWhite,
                             )),
@@ -210,7 +210,7 @@ class SignupView extends StatelessWidget {
                         SizedBox(
                           width: 68.w,
                           child: TextField(
-                            style: !darkThemePreference.darkMode.value
+                            style: !darkThemePreference
                                 ? AppTextStyles.regBlackTextField12
                                 : AppTextStyles.regWhiteTextField12,
                             maxLines: 1,
@@ -218,7 +218,7 @@ class SignupView extends StatelessWidget {
                             decoration: InputDecoration.collapsed(
                               hintText: "Email Address",
                               border: InputBorder.none,
-                              hintStyle: !darkThemePreference.darkMode.value
+                              hintStyle: !darkThemePreference
                                   ? AppTextStyles.regBlackTextField12
                                   : AppTextStyles.regWhiteTextField12,
                             ),
@@ -236,12 +236,12 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       border: signupController.password.value
                           ? Border.all(
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.red
                                   : Colors.greenAccent,
                               width: 0.5.w)
@@ -273,7 +273,7 @@ class SignupView extends StatelessWidget {
                             child: Icon(
                               Icons.lock_outlined,
                               size: 4.w,
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.kBlack2
                                   : AppColors.kWhite,
                             )),
@@ -284,7 +284,7 @@ class SignupView extends StatelessWidget {
                         SizedBox(
                           width: 68.w,
                           child: TextField(
-                            style: !darkThemePreference.darkMode.value
+                            style: !darkThemePreference
                                 ? AppTextStyles.regBlackTextField12
                                 : AppTextStyles.regWhiteTextField12,
                             maxLines: 1,
@@ -293,7 +293,7 @@ class SignupView extends StatelessWidget {
                             decoration: InputDecoration.collapsed(
                               hintText: "Password",
                               border: InputBorder.none,
-                              hintStyle: !darkThemePreference.darkMode.value
+                              hintStyle: !darkThemePreference
                                   ? AppTextStyles.regBlackTextField12
                                   : AppTextStyles.regWhiteTextField12,
                             ),
@@ -318,7 +318,7 @@ class SignupView extends StatelessWidget {
                                   child: Icon(
                                     Icons.visibility_off,
                                     size: 5.w,
-                                    color: darkThemePreference.darkMode.value
+                                    color: darkThemePreference
                                         ? AppColors.kWhite
                                         : AppColors.kBlack2,
                                   ))
@@ -330,7 +330,7 @@ class SignupView extends StatelessWidget {
                                   child: Icon(
                                     Icons.visibility,
                                     size: 5.w,
-                                    color: darkThemePreference.darkMode.value
+                                    color: darkThemePreference
                                         ? AppColors.kWhite
                                         : AppColors.kBlack2,
                                   ),
@@ -345,7 +345,7 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: 5.4.h,
                     decoration: BoxDecoration(
-                      color: !darkThemePreference.darkMode.value
+                      color: !darkThemePreference
                           ? AppColors.kWhite
                           : AppColors.kText2,
                       borderRadius: BorderRadius.only(
@@ -378,7 +378,7 @@ class SignupView extends StatelessWidget {
                             child: Icon(
                               Icons.lock_outlined,
                               size: 4.w,
-                              color: !darkThemePreference.darkMode.value
+                              color: !darkThemePreference
                                   ? AppColors.kBlack2
                                   : AppColors.kWhite,
                             )),
@@ -390,7 +390,7 @@ class SignupView extends StatelessWidget {
                           width: 68.w,
                           child: TextField(
                               maxLines: 1,
-                              style: !darkThemePreference.darkMode.value
+                              style: !darkThemePreference
                                   ? AppTextStyles.regBlackTextField12
                                   : AppTextStyles.regWhiteTextField12,
                               obscureText:
@@ -399,7 +399,7 @@ class SignupView extends StatelessWidget {
                               decoration: InputDecoration.collapsed(
                                 hintText: "Repeat Password",
                                 border: InputBorder.none,
-                                hintStyle: !darkThemePreference.darkMode.value
+                                hintStyle: !darkThemePreference
                                     ? AppTextStyles.regBlackTextField12
                                     : AppTextStyles.regWhiteTextField12,
                               )),
@@ -420,7 +420,7 @@ class SignupView extends StatelessWidget {
                                   child: Icon(
                                     Icons.visibility_off,
                                     size: 5.w,
-                                    color: darkThemePreference.darkMode.value
+                                    color: darkThemePreference
                                         ? AppColors.kWhite
                                         : AppColors.kBlack2,
                                   ))
@@ -432,7 +432,7 @@ class SignupView extends StatelessWidget {
                                   child: Icon(
                                     Icons.visibility,
                                     size: 5.w,
-                                    color: darkThemePreference.darkMode.value
+                                    color: darkThemePreference
                                         ? AppColors.kWhite
                                         : AppColors.kBlack2,
                                   ),
@@ -448,9 +448,9 @@ class SignupView extends StatelessWidget {
                     height: 3.h,
                   ),
                   CustomButton(
-                    color: !darkThemePreference.darkMode.value
+                    color: !darkThemePreference
                         ? AppColors.kText2
-                        : Colors.lightBlue,
+                        : AppColors.kText,
                     style: AppTextStyles.regWhiteBold12,
                     text: "Sign Up",
                     height: 5.4.h,

@@ -8,7 +8,7 @@ class DarkThemePreference extends GetxController {
 
   @override
   void onInit() {
-    getTheme();
+    // getTheme();
     super.onInit();
   }
 
