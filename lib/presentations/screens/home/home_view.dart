@@ -146,7 +146,7 @@ class _HomePageViewState extends State<HomePageView>
       return homeController.loading.value
           ? Scaffold(
               backgroundColor:
-                  !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
+                  !darkThemePreference ? AppColors.kWhite : AppColors.kDarkBG,
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -159,13 +159,13 @@ class _HomePageViewState extends State<HomePageView>
             )
           : Scaffold(
               backgroundColor:
-                  !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
+                  !darkThemePreference ? AppColors.kWhite : AppColors.kDarkBG,
               appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(kToolbarHeight + 100),
                 child: AppBar(
                   backgroundColor: !darkThemePreference
                       ? AppColors.kWhite
-                      : AppColors.kBlack2,
+                      : AppColors.kDarkBG,
                   flexibleSpace: ClipPath(
                     clipper: CustomAppBarClipper(),
                     child: Container(
@@ -293,7 +293,7 @@ class _HomePageViewState extends State<HomePageView>
                                                       height: 8.h,
                                                       decoration: BoxDecoration(
                                                         color: darkThemePreference
-                                                            ? AppColors.kBlack2
+                                                            ? AppColors.kDarkBG
                                                             : AppColors
                                                                 .kGreyToWhite,
                                                         border: Border.all(

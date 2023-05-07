@@ -3,7 +3,7 @@ import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_utils.dart';
-import 'consts.dart';
+
 import 'error_handler.dart';
 
 class DioUtils {

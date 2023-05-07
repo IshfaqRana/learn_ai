@@ -30,7 +30,7 @@ class _DetailScreenState extends State<DetailScreen> {
     bool darkThemePreference = brightness == Brightness.dark;
     return Scaffold(
       backgroundColor:
-          !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
+          !darkThemePreference ? AppColors.kWhite : AppColors.kDarkBG,
       appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: InkWell(

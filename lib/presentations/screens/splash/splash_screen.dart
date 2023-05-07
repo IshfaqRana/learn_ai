@@ -28,8 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, route);
   }
 
-  DarkThemePreference darkThemePreference = DarkThemePreference();
-
   route() {
     Navigator.pushReplacement(
         context,
@@ -45,7 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
       login = true;
     } else {
       databases();
-      darkThemePreference.setDarkTheme(true);
     }
   }
 
@@ -71,7 +68,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    darkThemePreference.getTheme();
     checkUser();
     startTime();
     super.initState();
@@ -79,36 +75,70 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer(
-      duration: const Duration(seconds: 10), //Default value
-      interval:
-          const Duration(seconds: 1), //Default value: Duration(seconds: 0)
-      color: AppColors.hardBlue, //Default value
-      colorOpacity: 0, //Default value
-      enabled: true, //Default value
-      direction: const ShimmerDirection.fromLTRB(),
-      child: Scaffold(
-          backgroundColor: AppColors.kWhite,
-          body: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: SizedBox(
-                    height: 30.h,
-                    child: Image.asset(
-                      AppImages.splash,
-                      fit: BoxFit.fill,
-                      // color: AppColors.kBlack,
-                    ),
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool darkThemePreference = brightness == Brightness.dark;
+    return !darkThemePreference
+        ? Shimmer(
+            duration: const Duration(seconds: 10), //Default value
+            interval: const Duration(
+                seconds: 1), //Default value: Duration(seconds: 0)
+            color: AppColors.hardBlue, //Default value
+            colorOpacity: 0, //Default value
+            enabled: true, //Default value
+            direction: const ShimmerDirection.fromLTRB(),
+            child: Scaffold(
+                backgroundColor: AppColors.kWhite,
+                body: SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          height: 30.h,
+                          child: Image.asset(
+                            AppImages.white_splash,
+                            fit: BoxFit.fill,
+                            // color: AppColors.kBlack,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          )),
-    );
+                )),
+          )
+        : Shimmer(
+            duration: const Duration(seconds: 10), //Default value
+            interval: const Duration(
+                seconds: 1), //Default value: Duration(seconds: 0)
+            color: AppColors.kWhite, //Default value
+            colorOpacity: 0, //Default value
+            enabled: true, //Default value
+            direction: const ShimmerDirection.fromLTRB(),
+            child: Scaffold(
+                backgroundColor: AppColors.kDarkBG,
+                body: SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          height: 30.h,
+                          child: Image.asset(
+                            AppImages.dark_splash,
+                            fit: BoxFit.contain,
+                            // color: AppColors.kBlack,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          );
   }
 }

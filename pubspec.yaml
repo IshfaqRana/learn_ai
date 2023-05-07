@@ -41,11 +41,13 @@ dev_dependencies:
     sdk: flutter
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/logo.png"
-  adaptive_icon_background: "#000000"
+  image_path: "assets/images/white_logo.jpeg"
+  dark_mode:
+    image_path: "assets/images/dark_logo.jpeg"
+  # adaptive_icon_background: "#000000"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
@@ -87,3 +89,4 @@ flutter:
         - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

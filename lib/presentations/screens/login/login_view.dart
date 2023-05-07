@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
     return Obx(
       () => Scaffold(
         backgroundColor:
-            !darkThemePreference ? AppColors.kWhite : AppColors.kBlack2,
+            !darkThemePreference ? AppColors.kWhite : AppColors.kDarkBG,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
