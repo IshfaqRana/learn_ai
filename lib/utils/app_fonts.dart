@@ -6,4 +6,6 @@ class AppFont {
   static String sFDisplayRegular = "SFDisplayRegular";
   static String charmBold = "CharmBold";
   static String charmRegular = "Charm-Regular";
+  static String alioProBold = "AlioProBold";
+  static String railsDislay = "RailsDisplaySolid";
 }

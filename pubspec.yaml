@@ -87,6 +87,12 @@ flutter:
     - family: sficonsets
       fonts:
         - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
+    - family: AlioProBold
+      fonts:
+        - asset: assets/fonts/alio-pro-bold.otf
+    - family: RailsDisplaySolid
+      fonts:
+        - asset: assets/fonts/Rails-Display.otf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 

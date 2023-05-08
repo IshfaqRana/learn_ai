@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../../utils/app_fonts.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
 import '../../../utils/theme.dart';
@@ -175,12 +176,38 @@ class _HomePageViewState extends State<HomePageView>
                     ),
                   ),
                   centerTitle: false,
-                  title: Text(
-                    "Learn AI",
-                    style: !darkThemePreference
-                        ? AppTextStyles.regBlackBold20
-                        : AppTextStyles.regWhiteBold20,
-                  ),
+                  title: RichText(
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      text: TextSpan(
+                          text: 'Learn ',
+                          style: AppTextStyles.regOrangeBold20,
+                          // !darkThemePreference
+                          //     ? AppTextStyles.regBlack10Bold
+                          //     : AppTextStyles.regWhite10Bold,
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'AI',
+                              style: !darkThemePreference
+                                  ? AppTextStyles.regAIBlackBold20
+                                  : AppTextStyles.regAIWhiteBold20,
+                            ),
+                          ])),
+
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       "Learn",
+                  //       style: AppTextStyles.regOrangeBold20,
+                  //     ),
+                  //     Text(
+                  //       " AI",
+                  // style: !darkThemePreference
+                  //     ? AppTextStyles.regAIBlackBold20
+                  //     : AppTextStyles.regAIWhiteBold20,
+                  //     ),
+                  //   ],
+                  // ),
                   elevation: 0,
                   actions: <Widget>[
                     Padding(
@@ -205,7 +232,8 @@ class _HomePageViewState extends State<HomePageView>
                           'Logout',
                           style: TextStyle(
                             color: AppColors.kWhite,
-                            fontSize: 16.0,
+                            fontFamily: AppFont.sFDisplayBold,
+                            fontSize: 13.sp,
                           ),
                         ),
                       ),

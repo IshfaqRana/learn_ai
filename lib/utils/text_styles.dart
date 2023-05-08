@@ -220,6 +220,24 @@ class AppTextStyles {
       fontSize: 20.sp,
       fontWeight: FontWeight.bold,
       fontFamily: AppFont.sFDisplayBold);
+  static TextStyle regOrangeBold20 = TextStyle(
+    color: AppColors.orange,
+    fontSize: 30.sp,
+    // fontWeight: FontWeight.bold,
+    fontFamily: AppFont.alioProBold,
+  );
+  static TextStyle regAIBlackBold20 = TextStyle(
+    color: AppColors.kBlack1,
+    fontSize: 20.sp,
+    // fontWeight: FontWeight.bold,
+    fontFamily: AppFont.railsDislay,
+  );
+  static TextStyle regAIWhiteBold20 = TextStyle(
+    color: AppColors.kWhite,
+    fontSize: 20.sp,
+    // fontWeight: FontWeight.bold,
+    fontFamily: AppFont.railsDislay,
+  );
   static TextStyle regWhiteBold15 = TextStyle(
       color: AppColors.kWhite,
       fontSize: 15.sp,
