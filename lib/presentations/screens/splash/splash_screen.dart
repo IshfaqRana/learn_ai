@@ -98,9 +98,10 @@ class _SplashScreenState extends State<SplashScreen> {
                       Center(
                         child: SizedBox(
                           height: 30.h,
+                          width: 100.w,
                           child: Image.asset(
                             AppImages.white_splash,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.fitWidth,
                             // color: AppColors.kBlack,
                           ),
                         ),

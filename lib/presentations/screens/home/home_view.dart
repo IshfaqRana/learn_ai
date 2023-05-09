@@ -189,7 +189,12 @@ class _HomePageViewState extends State<HomePageView>
                             TextSpan(
                               text: 'AI',
                               style: !darkThemePreference
-                                  ? AppTextStyles.regAIBlackBold20
+                                  ? TextStyle(
+    color: AppColors.kBlack1,
+    fontSize: 25.sp,
+    // fontWeight: FontWeight.bold,
+    fontFamily: AppFont.railsDislay,
+  )
                                   : AppTextStyles.regAIWhiteBold20,
                             ),
                           ])),
