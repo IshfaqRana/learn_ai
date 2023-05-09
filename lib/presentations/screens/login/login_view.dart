@@ -303,7 +303,7 @@ class LoginView extends StatelessWidget {
                                   TextSpan(
                                       text: 'Sign Up',
                                       style: TextStyle(
-                                        color: Colors.blue,
+                                        color: AppColors.orange,
                                         fontSize: 10.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
