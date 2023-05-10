@@ -183,33 +183,56 @@ class _HomePageViewState extends State<HomePageView>
               backgroundColor:
                   !darkThemePreference ? AppColors.kWhite : AppColors.kDarkBG,
               appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(kToolbarHeight + 100),
+                preferredSize: Size.fromHeight(21.h),
                 child: AppBar(
                   backgroundColor: !darkThemePreference
                       ? AppColors.kWhite
                       : AppColors.kDarkBG,
-                  flexibleSpace: Stack(
-                    children: [
-                      ClipPath(
-                        clipper: CustomAppBarClipper(),
-                        child: Container(
-                            height:  25.h+.5.w,
-                            // clipBehavior: Clip.antiAlias,
-                            color: AppColors.orange),
-                      ),
-                      ClipPath(
-                        clipper: CustomAppBarClipper(),
-                        child: Container(
-                          height: 25.h,
-                          // clipBehavior: Clip.antiAlias,
-                          // color: AppColors.orange
-                          color: darkThemePreference
-                              ? AppColors.kText2
-                              : AppColors.kGrey4,
+                  flexibleSpace: Platform.isIOS
+                      ? Stack(
+                          children: [
+                            ClipPath(
+                              clipper: CustomAppBarClipper(),
+                              child: Container(
+                                  height: 23.h + .3.w,
+                                  // clipBehavior: Clip.antiAlias,
+                                  color: AppColors.orange),
+                            ),
+                            ClipPath(
+                              clipper: CustomAppBarClipper(),
+                              child: Container(
+                                height: 23.h,
+                                // clipBehavior: Clip.antiAlias,
+                                // color: AppColors.orange
+                                color: darkThemePreference
+                                    ? AppColors.kText2
+                                    : AppColors.kGrey4,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Stack(
+                          children: [
+                            ClipPath(
+                              clipper: CustomAppBarClipper(),
+                              child: Container(
+                                  height: 23.h + .3.w,
+                                  // clipBehavior: Clip.antiAlias,
+                                  color: AppColors.orange),
+                            ),
+                            ClipPath(
+                              clipper: CustomAppBarClipper(),
+                              child: Container(
+                                height: 23.h,
+                                // clipBehavior: Clip.antiAlias,
+                                // color: AppColors.orange
+                                color: darkThemePreference
+                                    ? AppColors.kText2
+                                    : AppColors.kGrey4,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                   foregroundColor:
                       darkThemePreference ? AppColors.kText2 : AppColors.kGrey4,
                   centerTitle: false,
