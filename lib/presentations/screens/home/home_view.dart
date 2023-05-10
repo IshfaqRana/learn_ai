@@ -194,14 +194,14 @@ class _HomePageViewState extends State<HomePageView>
                             ClipPath(
                               clipper: CustomAppBarClipper(),
                               child: Container(
-                                  height: 23.h + .3.w,
+                                  height: 25.h + .3.w,
                                   // clipBehavior: Clip.antiAlias,
                                   color: AppColors.orange),
                             ),
                             ClipPath(
                               clipper: CustomAppBarClipper(),
                               child: Container(
-                                height: 23.h,
+                                height: 25.h,
                                 // clipBehavior: Clip.antiAlias,
                                 // color: AppColors.orange
                                 color: darkThemePreference
@@ -320,7 +320,7 @@ class _HomePageViewState extends State<HomePageView>
                       SizedBox(
                         child: Padding(
                           padding: EdgeInsets.only(
-                              top: 2.h, bottom: 2.h, left: 2.5.w, right: 2.5.w),
+                              top: 1.h, bottom: 1.h, left: 2.5.w, right: 2.5.w),
                           child: homeController.chats.isEmpty
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -368,7 +368,7 @@ class _HomePageViewState extends State<HomePageView>
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 66.h,
+                                      height: 64.h,
                                       child: ListView.builder(
                                           itemCount:
                                               homeController.chats.length,
