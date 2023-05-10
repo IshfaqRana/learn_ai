@@ -193,14 +193,14 @@ class _HomePageViewState extends State<HomePageView>
                       ClipPath(
                         clipper: CustomAppBarClipper(),
                         child: Container(
-                            height: kToolbarHeight + 20.5.h,
+                            height:  25.h+.5.w,
                             // clipBehavior: Clip.antiAlias,
                             color: AppColors.orange),
                       ),
                       ClipPath(
                         clipper: CustomAppBarClipper(),
                         child: Container(
-                          height: kToolbarHeight + 16.2.h,
+                          height: 25.h,
                           // clipBehavior: Clip.antiAlias,
                           // color: AppColors.orange
                           color: darkThemePreference
