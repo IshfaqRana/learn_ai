@@ -437,16 +437,40 @@ class _HomePageViewState extends State<HomePageView>
                         ),
                       ),
                       Align(
-                          alignment: Alignment.bottomCenter,
-                          child: SizedBox(
-                            height: 8.h,
-                            child: Text(
-                              "Swipe left to Scan Document >>>",
+                                alignment: Alignment.bottomCenter,
+                        child: SizedBox(
+                          height: 8.h,
+                          child: RichText(
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          text: TextSpan(
+                              text: 'Swipe Left to ',
                               style: !darkThemePreference
-                                  ? AppTextStyles.regBlack12Bold
-                                  : AppTextStyles.regGrey12Bold,
-                            ),
-                          ))
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regGrey12Bold,
+                             
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Scan ',
+                                  style: TextStyle(
+                            color: AppColors.orange,
+                            fontSize: 12.sp,
+                            fontFamily: AppFont.sFDisplaySemibold,
+                          ),
+                                     
+                                children: <TextSpan>[
+                                              TextSpan(
+                              text: 'Document ',
+                              style: !darkThemePreference
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regGrey12Bold,
+                                              )
+                                ]
+                                ),
+                              ])),
+                        ),
+                      ),
+
                     ],
                   ),
                   Container(
@@ -460,15 +484,50 @@ class _HomePageViewState extends State<HomePageView>
                           children: [
                             Align(
                                 alignment: Alignment.bottomCenter,
-                                child: SizedBox(
-                                  height: 8.h,
-                                  child: Text(
-                                    "<<< Swipe Right for Home Page",
-                                    style: !darkThemePreference
-                                        ? AppTextStyles.regBlack12Bold
-                                        : AppTextStyles.regGrey12Bold,
-                                  ),
-                                ))
+                              child: SizedBox(
+                                height: 8.h,
+                                child: RichText(
+                                                    textAlign: TextAlign.center,
+                                                    maxLines: 1,
+                                                    text: TextSpan(
+                                                        text: '<<< Swipe Right for ',
+                                                        style: !darkThemePreference
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regGrey12Bold,
+                                                       
+                                                        children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Home ',
+                                  style: TextStyle(
+                                  color: AppColors.orange,
+                                  fontSize: 12.sp,
+                                  fontFamily: AppFont.sFDisplaySemibold,
+                                ),
+                                     
+                                children: <TextSpan>[
+                                                          TextSpan(
+                                                        text: 'Page ',
+                                                        style: !darkThemePreference
+                                            ? AppTextStyles.regBlack12Bold
+                                            : AppTextStyles.regGrey12Bold,
+                                                          )
+                                ]
+                                ),
+                                                        ])),
+                              ),
+                            ),
+
+                            // Align(
+                            //     alignment: Alignment.bottomCenter,
+                            //     child: SizedBox(
+                            //       height: 8.h,
+                            //       child: Text(
+                            //         "<<< Swipe Right for Home Page",
+                            //         style: !darkThemePreference
+                            //             ? AppTextStyles.regBlack12Bold
+                            //             : AppTextStyles.regGrey12Bold,
+                            //       ),
+                            //     ))
                           ],
                         );
                       }),
