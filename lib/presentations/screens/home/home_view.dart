@@ -139,6 +139,27 @@ class _HomePageViewState extends State<HomePageView>
         //       ),
       );
 
+  double _xOffset = 0.0;
+
+  void _onHorizontalDragUpdate(DragUpdateDetails details) {
+    if (_xOffset < 0 || details.delta.dx < 0) {
+      setState(() {
+        _xOffset += details.delta.dx;
+        Utils.printDebug(_xOffset);
+        // if(_xOffset < -)
+      });
+    }
+  }
+
+  void _onHorizontalDragEnd(DragEndDetails details) {
+    if (_xOffset < -200) {
+      openImageScanner(context);
+    }
+    setState(() {
+      _xOffset = 0.0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -167,14 +188,30 @@ class _HomePageViewState extends State<HomePageView>
                   backgroundColor: !darkThemePreference
                       ? AppColors.kWhite
                       : AppColors.kDarkBG,
-                  flexibleSpace: ClipPath(
-                    clipper: CustomAppBarClipper(),
-                    child: Container(
-                      color: darkThemePreference
-                          ? AppColors.kText2
-                          : AppColors.kGrey4,
-                    ),
+                  flexibleSpace: Stack(
+                    children: [
+                      ClipPath(
+                        clipper: CustomAppBarClipper(),
+                        child: Container(
+                            height: kToolbarHeight + 20.5.h,
+                            // clipBehavior: Clip.antiAlias,
+                            color: AppColors.orange),
+                      ),
+                      ClipPath(
+                        clipper: CustomAppBarClipper(),
+                        child: Container(
+                          height: kToolbarHeight + 16.2.h,
+                          // clipBehavior: Clip.antiAlias,
+                          // color: AppColors.orange
+                          color: darkThemePreference
+                              ? AppColors.kText2
+                              : AppColors.kGrey4,
+                        ),
+                      ),
+                    ],
                   ),
+                  foregroundColor:
+                      darkThemePreference ? AppColors.kText2 : AppColors.kGrey4,
                   centerTitle: false,
                   title: RichText(
                       textAlign: TextAlign.center,
@@ -190,11 +227,11 @@ class _HomePageViewState extends State<HomePageView>
                               text: 'AI',
                               style: !darkThemePreference
                                   ? TextStyle(
-    color: AppColors.kBlack1,
-    fontSize: 25.sp,
-    // fontWeight: FontWeight.bold,
-    fontFamily: AppFont.railsDislay,
-  )
+                                      color: AppColors.kBlack1,
+                                      fontSize: 25.sp,
+                                      // fontWeight: FontWeight.bold,
+                                      fontFamily: AppFont.railsDislay,
+                                    )
                                   : AppTextStyles.regAIWhiteBold20,
                             ),
                           ])),
@@ -224,6 +261,8 @@ class _HomePageViewState extends State<HomePageView>
                               ? AppColors.kText2
                               : AppColors.kGrey3,
                           shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                width: .2.w, color: AppColors.orange),
                             borderRadius: BorderRadius.circular(6.h),
                           ),
                         ),
@@ -247,10 +286,13 @@ class _HomePageViewState extends State<HomePageView>
                   automaticallyImplyLeading: false,
                 ),
               ),
-              body: PageView(
-                controller: pageController,
-                children: [
-                  Stack(
+              body: GestureDetector(
+                onHorizontalDragUpdate: _onHorizontalDragUpdate,
+                onHorizontalDragEnd: _onHorizontalDragEnd,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
+                  transform: Matrix4.translationValues(_xOffset, 0, 0),
+                  child: Stack(
                     children: [
                       SizedBox(
                         child: Padding(
@@ -263,7 +305,7 @@ class _HomePageViewState extends State<HomePageView>
                                     SizedBox(
                                       height: 4.h,
                                       child: Text(
-                                        "Previuos Searches",
+                                        "Previous Searches",
                                         style: !darkThemePreference
                                             ? AppTextStyles.regBlack12Bold
                                             : AppTextStyles.regWhiteBold12,
@@ -330,14 +372,15 @@ class _HomePageViewState extends State<HomePageView>
                                                             : AppColors
                                                                 .kGreyToWhite,
                                                         border: Border.all(
-                                                          width: .2.w,
-                                                          color:
-                                                              !darkThemePreference
-                                                                  ? AppColors
-                                                                      .kText2
-                                                                  : AppColors
-                                                                      .kGrey4,
-                                                        ),
+                                                            width: .2.w,
+                                                            color:
+                                                                AppColors.orange
+                                                            // !darkThemePreference
+                                                            //     ? AppColors
+                                                            //         .kText2
+                                                            //     : AppColors
+                                                            //         .kGrey4,
+                                                            ),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(2.w),
@@ -437,103 +480,100 @@ class _HomePageViewState extends State<HomePageView>
                         ),
                       ),
                       Align(
-                                alignment: Alignment.bottomCenter,
+                        alignment: Alignment.bottomCenter,
                         child: SizedBox(
                           height: 8.h,
                           child: RichText(
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          text: TextSpan(
-                              text: 'Swipe Left to ',
-                              style: !darkThemePreference
-                                            ? AppTextStyles.regBlack12Bold
-                                            : AppTextStyles.regGrey12Bold,
-                             
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Scan ',
-                                  style: TextStyle(
-                            color: AppColors.orange,
-                            fontSize: 12.sp,
-                            fontFamily: AppFont.sFDisplaySemibold,
-                          ),
-                                     
-                                children: <TextSpan>[
-                                              TextSpan(
-                              text: 'Document ',
-                              style: !darkThemePreference
-                                            ? AppTextStyles.regBlack12Bold
-                                            : AppTextStyles.regGrey12Bold,
-                                              )
-                                ]
-                                ),
-                              ])),
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              text: TextSpan(
+                                  text: 'Swipe Left to ',
+                                  style: !darkThemePreference
+                                      ? AppTextStyles.regBlack12Bold
+                                      : AppTextStyles.regGrey12Bold,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'Scan ',
+                                        style: TextStyle(
+                                          color: AppColors.orange,
+                                          fontSize: 12.sp,
+                                          fontFamily: AppFont.sFDisplaySemibold,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: 'Document ',
+                                            style: !darkThemePreference
+                                                ? AppTextStyles.regBlack12Bold
+                                                : AppTextStyles.regGrey12Bold,
+                                          )
+                                        ]),
+                                  ])),
                         ),
                       ),
-
                     ],
                   ),
-                  Container(
-                    color: !darkThemePreference
-                        ? AppColors.kWhite
-                        : AppColors.kBlack2,
-                    child: Center(
-                      child: Builder(builder: (BuildContext context) {
-                        openImageScanner(context);
-                        return Stack(
-                          children: [
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                              child: SizedBox(
-                                height: 8.h,
-                                child: RichText(
-                                                    textAlign: TextAlign.center,
-                                                    maxLines: 1,
-                                                    text: TextSpan(
-                                                        text: '<<< Swipe Right for ',
-                                                        style: !darkThemePreference
-                                            ? AppTextStyles.regBlack12Bold
-                                            : AppTextStyles.regGrey12Bold,
-                                                       
-                                                        children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Home ',
-                                  style: TextStyle(
-                                  color: AppColors.orange,
-                                  fontSize: 12.sp,
-                                  fontFamily: AppFont.sFDisplaySemibold,
-                                ),
-                                     
-                                children: <TextSpan>[
-                                                          TextSpan(
-                                                        text: 'Page ',
-                                                        style: !darkThemePreference
-                                            ? AppTextStyles.regBlack12Bold
-                                            : AppTextStyles.regGrey12Bold,
-                                                          )
-                                ]
-                                ),
-                                                        ])),
-                              ),
-                            ),
+                ),
+                // Container(
+                //   color: !darkThemePreference
+                //       ? AppColors.kWhite
+                //       : AppColors.kBlack2,
+                //   child: Center(
+                //     child: Builder(builder: (BuildContext context) {
+                //       openImageScanner(context);
+                //       return Stack(
+                //         children: [
+                //           Align(
+                //               alignment: Alignment.bottomCenter,
+                //             child: SizedBox(
+                //               height: 8.h,
+                //               child: RichText(
+                //                                   textAlign: TextAlign.center,
+                //                                   maxLines: 1,
+                //                                   text: TextSpan(
+                //                                       text: '<<< Swipe Right for ',
+                //                                       style: !darkThemePreference
+                //                           ? AppTextStyles.regBlack12Bold
+                //                           : AppTextStyles.regGrey12Bold,
 
-                            // Align(
-                            //     alignment: Alignment.bottomCenter,
-                            //     child: SizedBox(
-                            //       height: 8.h,
-                            //       child: Text(
-                            //         "<<< Swipe Right for Home Page",
-                            //         style: !darkThemePreference
-                            //             ? AppTextStyles.regBlack12Bold
-                            //             : AppTextStyles.regGrey12Bold,
-                            //       ),
-                            //     ))
-                          ],
-                        );
-                      }),
-                    ),
-                  ),
-                ],
+                //                                       children: <TextSpan>[
+                //               TextSpan(
+                //                 text: 'Home ',
+                //                 style: TextStyle(
+                //                 color: AppColors.orange,
+                //                 fontSize: 12.sp,
+                //                 fontFamily: AppFont.sFDisplaySemibold,
+                //               ),
+
+                //               children: <TextSpan>[
+                //                                         TextSpan(
+                //                                       text: 'Page ',
+                //                                       style: !darkThemePreference
+                //                           ? AppTextStyles.regBlack12Bold
+                //                           : AppTextStyles.regGrey12Bold,
+                //                                         )
+                //               ]
+                //               ),
+                //                                       ])),
+                //             ),
+                //           ),
+
+                // Align(
+                //     alignment: Alignment.bottomCenter,
+                //     child: SizedBox(
+                //       height: 8.h,
+                //       child: Text(
+                //         "<<< Swipe Right for Home Page",
+                //         style: !darkThemePreference
+                //             ? AppTextStyles.regBlack12Bold
+                //             : AppTextStyles.regGrey12Bold,
+                //       ),
+                //     ))
+                //         ],
+                //       );
+                //     }),
+                //   ),
+                // ),
+                // ],
               ),
             );
     });

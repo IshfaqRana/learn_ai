@@ -340,6 +340,11 @@ class AppTextStyles {
     fontSize: 12.sp,
     fontFamily: AppFont.sFDisplaySemibold,
   );
+  static TextStyle regGrey20Bold = TextStyle(
+    color: AppColors.kGreyToWhite,
+    fontSize: 20.sp,
+    fontFamily: AppFont.sFDisplaySemibold,
+  );
 
   static TextStyle regRed10 = TextStyle(
     color: AppColors.red,

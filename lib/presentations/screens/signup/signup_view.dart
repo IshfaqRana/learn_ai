@@ -9,6 +9,7 @@ import 'package:learn_ai/utils/theme.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../../utils/app_fonts.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
@@ -46,10 +47,8 @@ class SignupView extends StatelessWidget {
                     child: SizedBox(
                       height: 3.h,
                       width: 1.5.h,
-                      child: Image.asset(AppImages.back,
-                          color: !darkThemePreference
-                              ? AppColors.kBlack2
-                              : AppColors.kWhite),
+                      child:
+                          Image.asset(AppImages.back, color: AppColors.orange),
                     ),
                   ),
                   SizedBox(
@@ -69,12 +68,24 @@ class SignupView extends StatelessWidget {
                   SizedBox(
                     height: 7.h,
                     width: 70.0.w,
-                    child: Text(
-                      "Sign Up",
-                      style: !darkThemePreference
-                          ? AppTextStyles.regBlack20Medium
-                          : AppTextStyles.regWhiteBold20,
-                    ),
+                    child: RichText(
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        text: TextSpan(
+                            text: 'Sign ',
+                            style: TextStyle(
+                              color: AppColors.orange,
+                              fontSize: 20.sp,
+                              fontFamily: AppFont.sFDisplaySemibold,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Up',
+                                style: !darkThemePreference
+                                    ? AppTextStyles.regBlackBold20
+                                    : AppTextStyles.regGrey20Bold,
+                              )
+                            ])),
                   ),
                   SizedBox(
                     height: 4.0.h,

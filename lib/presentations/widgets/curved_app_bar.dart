@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBarClipper extends CustomClipper<Path> {
+  CustomAppBarClipper();
+
   @override
   Path getClip(Size size) {
     var path = Path();
@@ -8,6 +10,7 @@ class CustomAppBarClipper extends CustomClipper<Path> {
     path.quadraticBezierTo(
         size.width / 2, size.height, size.width, size.height - 50);
     path.lineTo(size.width, 0);
+
     path.close();
     return path;
   }

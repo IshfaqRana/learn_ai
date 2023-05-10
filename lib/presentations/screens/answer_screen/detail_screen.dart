@@ -38,12 +38,13 @@ class _DetailScreenState extends State<DetailScreen> {
               Get.to(() => HomePageView());
             },
             child: SizedBox(
-              height: 3.h,
-              width: 5.w,
-              child: Image.asset(AppImages.back,
-                  color: !darkThemePreference
-                      ? AppColors.kBlack
-                      : AppColors.kWhite),
+              height: 3.w,
+              width: 3.w,
+              child: Image.asset(
+                AppImages.back,
+                color: AppColors.orange,
+                fit: BoxFit.none,
+              ),
             ),
           ),
           backgroundColor:
@@ -73,6 +74,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
                           // : Color(0xFF616D7E),
                           borderRadius: BorderRadius.circular(1.h),
+                          border:
+                              Border.all(width: .2.w, color: AppColors.orange
+                                  // !darkThemePreference
+                                  //     ? AppColors
+                                  //         .kText2
+                                  //     : AppColors
+                                  //         .kGrey4,
+                                  ),
                           boxShadow: [
                             BoxShadow(
                               color: const Color(0xFF000000).withOpacity(0.04),

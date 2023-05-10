@@ -7,6 +7,7 @@ import 'package:learn_ai/utils/theme.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../../utils/app_fonts.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/app_utils.dart';
 import '../../../utils/text_styles.dart';
@@ -52,12 +53,31 @@ class LoginView extends StatelessWidget {
                   SizedBox(
                     height: 7.h,
                     width: 70.0.w,
-                    child: Text(
-                      "Let’s sign you In!",
-                      style: !darkThemePreference
-                          ? AppTextStyles.regBlack15Bold
-                          : AppTextStyles.regWhiteBold15,
-                    ),
+                    child: RichText(
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        text: TextSpan(
+                            text: 'Let’s ',
+                            style: !darkThemePreference
+                                ? AppTextStyles.regBlack12Bold
+                                : AppTextStyles.regGrey12Bold,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'Sign ',
+                                  style: TextStyle(
+                                    color: AppColors.orange,
+                                    fontSize: 12.sp,
+                                    fontFamily: AppFont.sFDisplaySemibold,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'you In ',
+                                      style: !darkThemePreference
+                                          ? AppTextStyles.regBlack12Bold
+                                          : AppTextStyles.regGrey12Bold,
+                                    )
+                                  ]),
+                            ])),
                   ),
                   SizedBox(
                     height: 4.0.h,
