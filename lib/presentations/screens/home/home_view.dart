@@ -242,15 +242,12 @@ class _HomePageViewState extends State<HomePageView>
                       text: TextSpan(
                           text: 'Learn ',
                           style: AppTextStyles.regOrangeBold20,
-                          // !darkThemePreference
-                          //     ? AppTextStyles.regBlack10Bold
-                          //     : AppTextStyles.regWhite10Bold,
                           children: <TextSpan>[
                             TextSpan(
                               text: 'AI',
                               style: !darkThemePreference
                                   ? TextStyle(
-                                      color: AppColors.kBlack1,
+                                      color: AppColors.kBlack,
                                       fontSize: 25.sp,
                                       // fontWeight: FontWeight.bold,
                                       fontFamily: AppFont.railsDislay,
@@ -258,21 +255,6 @@ class _HomePageViewState extends State<HomePageView>
                                   : AppTextStyles.regAIWhiteBold20,
                             ),
                           ])),
-
-                  // Row(
-                  //   children: [
-                  //     Text(
-                  //       "Learn",
-                  //       style: AppTextStyles.regOrangeBold20,
-                  //     ),
-                  //     Text(
-                  //       " AI",
-                  // style: !darkThemePreference
-                  //     ? AppTextStyles.regAIBlackBold20
-                  //     : AppTextStyles.regAIWhiteBold20,
-                  //     ),
-                  //   ],
-                  // ),
                   elevation: 0,
                   actions: <Widget>[
                     Padding(
@@ -426,7 +408,7 @@ class _HomePageViewState extends State<HomePageView>
                                                                   size: 8.w,
                                                                   color: !darkThemePreference
                                                                       ? AppColors
-                                                                          .kText2
+                                                                          .chatGPTBGColor
                                                                       : AppColors
                                                                           .kGreyToWhite),
                                                             ),
@@ -438,9 +420,7 @@ class _HomePageViewState extends State<HomePageView>
                                                               child:
                                                                   DefaultTextStyle(
                                                                 style: !darkThemePreference
-                                                                    ? AppTextStyles
-                                                                        .regBlack10
-                                                                    : AppTextStyles
+                                                                    ? AppTextStyles.regBlack10                                                              : AppTextStyles
                                                                         .regWhite10,
                                                                 overflow:
                                                                     TextOverflow
@@ -479,7 +459,7 @@ class _HomePageViewState extends State<HomePageView>
                                                                   size: 8.w,
                                                                   color: !darkThemePreference
                                                                       ? AppColors
-                                                                          .kText2
+                                                                          .chatGPTBGColor
                                                                       : AppColors
                                                                           .kGreyToWhite,
                                                                 ),

@@ -5,7 +5,7 @@ class AppColors {
   static Color kBlack1 = const Color(0xFF2a2939);
   static Color kBlack2 = const Color(0xFF3D3D3D);
   static Color kDarkBG = const Color(0xFF2D2B40);
-  static Color kText2 = const Color(0xFF636466);
+  static Color  kText2 = const Color(0xFF636466);
   static Color kWhite = const Color(0xFFFFFFFF);
   static Color orange = const Color(0xFFfd6800);
   //E3E3E5

@@ -14,9 +14,8 @@ class AppTextStyles {
       fontFamily: AppFont.sFDisplayLight);
 
   static TextStyle regBlack10 = TextStyle(
-    color: AppColors.kBlack,
+    color: AppColors.chatGPTBGColor,
     fontSize: 10.sp,
-    fontWeight: FontWeight.w300,
     fontFamily: AppFont.sFDisplayLight,
   );
   static TextStyle regBlack10Bold = TextStyle(
@@ -133,7 +132,7 @@ class AppTextStyles {
     fontFamily: AppFont.sFDisplayMedium,
   );
   static TextStyle regBlack15Bold = TextStyle(
-    color: AppColors.kBlack2,
+    color: AppColors.kBlack,
     fontSize: 15.sp,
     fontFamily: AppFont.sFDisplaySemibold,
     fontWeight: FontWeight.w700,
